@@ -1,0 +1,30 @@
+<h1>Register</h1>
+<%= form_for @user do |f| %>
+<% if @user.errors.any? %>
+	<% @user.errors.full_messages.each do |mess| %>
+		<%= mess %>
+	<% end %>
+<% end %>
+	<table>
+		<tr>
+			<td>Name: </td>
+			<td><%= f.text_field :name, required: true %></td>
+		</tr>
+		<tr>
+			<td>Email: </td>
+			<td><%= f.email_field :email, required: true %></td>
+		</tr>
+		<tr>
+			<td>Password: </td>
+			<td><%= f.password_field :password, required: true %></td>
+		</tr>
+		<tr>
+			<td>Password confirmation: </td>
+			<td><%= f.password_field :password_confirmation, required: true %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><%= f.submit "Sign in" %></td>
+		</tr>
+	</table>
+<% end %>

@@ -1,0 +1,17 @@
+<h1>Log In Page</h1>
+<%= form_for :sess, url: 'login' do |f| %>
+	<table>
+		<tr>
+			<td>Email</td>
+			<td><%= f.email_field :email, :required => true %></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><%= f.password_field :password, :required => true %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><%= f.submit "Log in" %></td>
+		</tr>
+	</table>
+<% end %>

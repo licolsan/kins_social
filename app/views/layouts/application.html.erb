@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>KinsSocial</title>
+    <title>OmniAuthApp3</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,22 @@
   </head>
 
   <body>
+	  <% if flash[:notice] %>
+	  	<%= flash[:notice] %>
+	  <% end %>
+	  <% if current_user %>
+	  	<ul>
+	  		<li>Log in as <%= current_user.name %></li>
+	  		<li><%= link_to 'Log out', log_out_path, :method => :delete %></li>
+	  	</ul>
+	  <% else %>
+	  	<ul>
+	  		<li><%= link_to 'Sign up', sign_up_path %></li>
+	  		<li><%= link_to 'Log in', log_in_path %></li>
+	  		<li><%= link_to 'Log in with Facecbook', 'auth/facebook' %></li>
+	  		<li><%= link_to 'Log in with G+', 'auth/google_oauth2' %></li>
+	  	</ul>
+	  <% end %>
     <%= yield %>
   </body>
 </html>
