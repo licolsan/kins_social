@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'rails-controller-testing'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
