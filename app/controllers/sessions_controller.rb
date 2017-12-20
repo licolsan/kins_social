@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		session[:user_id] = nil
+		session.delete(:user_id)
 		#session[:omniauth] = nil
 		redirect_to root_path, notice: "Logged out"
 	end

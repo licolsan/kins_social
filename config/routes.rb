@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   get 'sign_up' => 'users#new'
   post 'users' => 'users#create'
+
+  resources :acount_activations, only: [:edit]
 end

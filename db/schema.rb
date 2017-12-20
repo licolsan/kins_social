@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 20171219040755) do
     t.string "color"
     t.string "email"
     t.string "password_digest"
+    t.string "remember_digest"
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
