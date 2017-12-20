@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
 	def login_to
 		@user = User.find_by(email: params[:sess][:email])
-		if @user && @user.authenticate(params[:sess][:password])
+		if @user && @user.authenticate(params[:sess][:password]) && @user.is_activated?
 			session[:user_id] = @user.id
 			redirect_to root_path, notice: "Logged in"
 		else
@@ -17,7 +17,6 @@ class SessionsController < ApplicationController
 
 	def create
 		auth = request.env['omniauth.auth']
-		#session[:omniauth] = auth.except('extra')
 		user = User.sign_in_from_omniauth(auth)
 		session[:user_id] = user.id
 		redirect_to root_path, notice: "Logged in"
@@ -25,7 +24,6 @@ class SessionsController < ApplicationController
 
 	def destroy
 		session.delete(:user_id)
-		#session[:omniauth] = nil
 		redirect_to root_path, notice: "Logged out"
 	end
 end
