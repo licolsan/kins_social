@@ -34,6 +34,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'rails-controller-testing'
 
+gem 'sendgrid-ruby'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
