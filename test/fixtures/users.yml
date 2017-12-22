@@ -7,7 +7,7 @@ one:
   avatar: MyString
   cover_photot: MyString
   color: MyString
-  password_digest: MyString
+  password_digest: <%= User.digest('MyString') %>
   role: MyString
 
 two:
@@ -17,5 +17,10 @@ two:
   avatar: MyString
   cover_photot: MyString
   color: MyString
-  password_digest: MyString
+  password_digest: <%= User.digest('MyString') %>
   role: MyString
+
+michael:
+  name: Michael Example
+  email: michael@example.com
+  password_digest: <%= User.digest('password') %>

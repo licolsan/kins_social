@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
 
 	def login_to
 		@user = User.find_by(email: params[:sess][:email])
+		
 		if @user && @user.authenticate(params[:sess][:password]) && @user.is_activated?
+
 			session[:user_id] = @user.id
 			redirect_to root_path, notice: "Logged in"
 		else
@@ -23,7 +25,8 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		session.delete(:user_id)
+		#session.delete(:user_id)
+		session[:user_id] = nil
 		redirect_to root_path, notice: "Logged out"
 	end
 end

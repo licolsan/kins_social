@@ -36,11 +36,6 @@ class User < ApplicationRecord
 		SecureRandom.urlsafe_base64
 	end
 
-	def remember
-		self.remember_token = User.new_token
-		update_attribute(remember_digest: User.digest(remember_token))
-	end
-
 	# decrypt activation_digest and compare to activation_token
 	def authenticated?(activation_token)
 		check =  BCrypt::Password.new(activation_digest).is_password?(activation_token)
