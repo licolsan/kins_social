@@ -1,7 +1,6 @@
 class User < ApplicationRecord
 	attr_accessor :activation_token, :remember_token
 
-	before_save :downcase_email
 	before_create :create_activation_digest
 
 
@@ -21,7 +20,7 @@ class User < ApplicationRecord
 			uid: auth.uid,
 			name: auth.info.name,
 			email: auth.info.email,
-			password: "@@@",
+			password: rand().to_s,
 			activated: true,
 			activated_at: Time.zone.now
 		)
@@ -40,10 +39,6 @@ class User < ApplicationRecord
 	def authenticated?(activation_token)
 		check =  BCrypt::Password.new(activation_digest).is_password?(activation_token)
 		return check
-	end
-
-	def downcase_email
-		self.email = email.downcase
 	end
 
 	def create_activation_digest
