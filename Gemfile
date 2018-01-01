@@ -35,6 +35,10 @@ gem 'omniauth-google-oauth2'
 gem 'rails-controller-testing'
 
 gem 'sendgrid-ruby'
+#gem 'carrierwave', '~> 0.9'
+gem 'carrierwave', '~> 1.2', '>= 1.2.1'
+gem 'fog', require: 'fog/aws'
+#gem "fog-aws"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

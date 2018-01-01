@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-	attr_accessor :activation_token, :remember_token
+	attr_accessor :activation_token, :remember_token, :skip_password_validation
+	mount_uploader :avatar, AttachmentUploader
+	mount_uploader :cover_photo, AttachmentUploader
 
 	before_save :downcase_email
 	before_create :create_activation_digest
@@ -7,9 +9,10 @@ class User < ApplicationRecord
 
 	has_secure_password
 
-	validates :name, :email, :password, :presence => true
+	validates :name, :email, :presence => true
 	validates :email, :uniqueness => true
 	validates :password, :confirmation => true
+	validates :password, :presence => true, unless: :skip_password_validation
 
 	def self.sign_in_from_omniauth(auth)
 		find_by(provider: auth.provider,uid: auth.uid) || sign_up_from_omniauth(auth)
