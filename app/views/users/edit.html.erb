@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td><%= f.file_field :avatar %></td>
+			<td><%= f.filestack_field :avatar, 'Upload your avatar' %></td>
 		</tr>
 		<tr>
 			<td>Cover photo: </td>
@@ -30,11 +30,10 @@
 					<img src="<%= @user.cover_photo %>" alt="your_cover_photo" style="width: 100%; height: 100%" />
 				</div>
 			</td>
-			
 		</tr>
 		<tr>
 			<td></td>
-			<td><%= f.file_field :cover_photo %></td>
+			<td><%= f.filestack_field :cover_photo, 'Upload your cover photo' %></td>
 		</tr>
 		<tr>
 			<td>Color: </td>

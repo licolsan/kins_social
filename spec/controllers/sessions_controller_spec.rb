@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 RSpec.describe SessionsController, type: :controller do
 	context "Log in" do
 		it "Log in page" do

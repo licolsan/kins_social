@@ -1,7 +1,5 @@
 class User < ApplicationRecord
 	attr_accessor :activation_token, :remember_token, :skip_password_validation
-	mount_uploader :avatar, AttachmentUploader
-	mount_uploader :cover_photo, AttachmentUploader
 
 	before_save :downcase_email
 	before_create :create_activation_digest

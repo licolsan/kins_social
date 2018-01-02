@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 RSpec.describe UsersController, type: :controller do
 	context "Sign up" do
 		it "signup page" do

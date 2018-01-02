@@ -17,13 +17,13 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
 
 
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
+  # def store_dir
+  #   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  # end
 
-  def extension_white_list
-    %w(jpg jpeg png)
-  end
+  # def extension_white_list
+  #   %w(jpg jpeg png)
+  # end
 
   # def fog_directory
   #   'https://mega.nz/fm/13ASzYbB'
