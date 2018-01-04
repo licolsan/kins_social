@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   #get 'log_out' => 'sessions#destroy'
 
   get 'sign_up' => 'users#new'
-  resources :users
-  # post 'users' => 'users#create'
 
   resources :account_activations, only: [:edit]
+  resources :users, except: [:new]
+  resources :friend_ships, only: [:index]
 end

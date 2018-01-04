@@ -1,9 +1,16 @@
 class User < ApplicationRecord
 	attr_accessor :activation_token, :remember_token, :skip_password_validation
+	has_many :friend_ship_senders,-> { where(status: 1) }, class_name: "FriendShip", foreign_key: :receiver_id, dependent: :destroy
+	has_many :senders, :through => :friend_ship_senders, :source => :sender, :foreign_key => :sender_id
+
+	has_many :friend_ship_receivers,-> { where(status: 1) }, class_name: "FriendShip", foreign_key: :sender_id, dependent: :destroy
+	has_many :receivers, :through => :friend_ship_receivers, :source => :receiver, :foreign_key => :receiver_id
+
+	has_many :friend_ship_waiters,-> { where(status: 0) }, class_name: "FriendShip", foreign_key: :receiver_id, dependent: :destroy
+	has_many :waiters, :through => :friend_ship_waiters, :source => :sender, :foreign_key => :sender_id
 
 	before_save :downcase_email
 	before_create :create_activation_digest
-
 
 	has_secure_password
 
@@ -62,5 +69,24 @@ class User < ApplicationRecord
 
 	def is_activated?
 		self.activated == true
+	end
+
+	def is_friend?(stranger)
+		FriendShip.where("(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", self.id, stranger.id, stranger.id, self.id).size != 0
+	end
+
+	def get_friend_senders
+		self.senders
+	end
+
+	def get_friend_receivers
+		self.receivers
+	end
+
+	def get_waiters
+		self.waiters
+	end
+
+	def get_stranger
 	end
 end
