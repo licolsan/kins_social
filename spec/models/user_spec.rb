@@ -28,4 +28,9 @@ RSpec.describe User, type: :model do
 		  expect(user).to eq(false)
   	end  	
   end
+  it "Identify friend" do
+    user1 = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+    user2 = User.create(provider: "abc", uid: "abc", name: "cba", email: "b@b", password: "123", password_confirmation: "123", activated: true)
+    expect(user1.is_friend?(user2)).to eq false
+  end
 end

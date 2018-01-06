@@ -9,6 +9,12 @@ class User < ApplicationRecord
 	has_many :friend_ship_waiters,-> { where(status: 0) }, class_name: "FriendShip", foreign_key: :receiver_id, dependent: :destroy
 	has_many :waiters, :through => :friend_ship_waiters, :source => :sender, :foreign_key => :sender_id
 
+	has_many :friend_ship_blocked_senders,-> { where(status: 2) }, class_name: "FriendShip", foreign_key: :receiver_id, dependent: :destroy
+	has_many :blocked_senders, :through => :friend_ship_blocked_senders, :source => :sender, :foreign_key => :sender_id
+
+	has_many :friend_ship_blocked_receivers,-> { where(status: 2) }, class_name: "FriendShip", foreign_key: :sender_id, dependent: :destroy
+	has_many :blocked_receivers, :through => :friend_ship_blocked_receivers, :source => :receiver, :foreign_key => :receiver_id
+
 	before_save :downcase_email
 	before_create :create_activation_digest
 
@@ -18,6 +24,8 @@ class User < ApplicationRecord
 	validates :email, :uniqueness => true
 	validates :password, :confirmation => true
 	validates :password, :presence => true, unless: :skip_password_validation
+
+	scope :all_except, -> (user) { where.not(id: user.id) }
 
 	def self.sign_in_from_omniauth(auth)
 		find_by(provider: auth.provider,uid: auth.uid) || sign_up_from_omniauth(auth)
@@ -83,10 +91,27 @@ class User < ApplicationRecord
 		self.receivers
 	end
 
+	def get_friend_number
+		return (get_friend_senders.size + get_friend_receivers.size)
+	end
+
 	def get_waiters
 		self.waiters
 	end
 
-	def get_stranger
+	def get_waiter_number
+		return get_waiters.size
+	end
+
+	def get_blocked_senders
+		self.blocked_senders
+	end
+
+	def get_blocked_receivers
+		self.blocked_receivers
+	end
+
+	def get_blocked_number
+		return (get_blocked_senders.size + get_blocked_receivers.size)
 	end
 end

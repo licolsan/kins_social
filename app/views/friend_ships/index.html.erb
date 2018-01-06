@@ -1,0 +1,87 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+			<h3 align="center">friends (<%= @friend_count %>)</h3>
+			<% @senders.each do |sender| %>
+				<div class="row" style="margin-bottom: 10px">
+					<div class="col-xs-2">
+						<img src="<%= sender.avatar %>" alt="friend_avatar" style="width: 40px; height: 40px"/>
+					</div>
+					<div class="col-xs-4">
+						<%= sender.name %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Unfriend', unfriend_path(sender), method: :delete, class: "btn btn-warning" %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Block', block_path(sender), method: :post, class: "btn btn-danger" %>
+					</div>
+				</div>
+			<% end %>
+			<% @receivers.each do |receiver| %>
+				<div class="row" style="margin-bottom: 10px">
+					<div class="col-xs-2">
+						<img src="<%= receiver.avatar %>" alt="friend_avatar" style="width: 40px; height: 40px"/>
+					</div>
+					<div class="col-xs-4">
+						<%= receiver.name %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Unfriend', unfriend_path(receiver), method: :delete, class: "btn btn-warning" %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Block', block_path(receiver), method: :post, class: "btn btn-danger" %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="col-sm-4">
+			<h3 align="center">All requests (<%= @waiter_count %>)</h3>
+			<% @waiters.each do |waiter| %>
+				<div class="row" style="margin-bottom: 10px">
+					<div class="col-xs-2">
+						<img src="<%= waiter.avatar %>" alt="friend_avatar" style="width: 40px; height: 40px"/>
+					</div>
+					<div class="col-xs-4">
+						<%= waiter.name %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Accept', accept_path(waiter), method: :post, class: "btn btn-success" %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Deny', deny_path(waiter), method: :delete, class: "btn btn-danger" %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="col-sm-4">
+			<h3 align="center">Block Lists (<%= @blocked_er_count %>)</h3>
+			<% @blocked_senders.each do |blocked_sender| %>
+				<div class="row" style="margin-bottom: 10px">
+					<div class="col-xs-2">
+						<img src="<%= blocked_sender.avatar %>" alt="friend_avatar" style="width: 40px; height: 40px"/>
+					</div>
+					<div class="col-xs-4">
+						<%= blocked_sender.name %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Unblock', block_path(blocked_sender), method: :post, class: "btn btn-success" %>
+					</div>
+				</div>
+			<% end %>
+			<% @blocked_receivers.each do |blocked_receiver| %>
+				<div class="row" style="margin-bottom: 10px">
+					<div class="col-xs-2">
+						<img src="<%= blocked_receiver.avatar %>" alt="friend_avatar" style="width: 40px; height: 40px"/>
+					</div>
+					<div class="col-xs-4">
+						<%= blocked_receiver.name %>
+					</div>
+					<div class="col-xs-3">
+						<%= link_to 'Unblock', unblock_path(blocked_receiver), method: :post, class: "btn btn-success" %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

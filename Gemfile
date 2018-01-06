@@ -35,15 +35,8 @@ gem 'omniauth-google-oauth2'
 gem 'rails-controller-testing'
 
 gem 'sendgrid-ruby'
-#gem 'carrierwave', '~> 0.9'
-gem 'carrierwave', '~> 1.2', '>= 1.2.1'
-gem 'fog-aws', require: 'fog/aws'
-#gem "fog-aws"
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 gem 'filestack-rails'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
