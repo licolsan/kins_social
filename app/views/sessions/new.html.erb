@@ -1,17 +1,25 @@
-<h1>Log In Page</h1>
+<center><label><h1>Log In Page</h1></label></center>
 <%= form_for :sess, url: 'login' do |f| %>
-	<table>
-		<tr>
-			<td>Email</td>
-			<td><%= f.email_field :email, :required => true %></td>
-		</tr>
-		<tr>
-			<td>Password</td>
-			<td><%= f.password_field :password, :required => true %></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><%= f.submit "Log in" %></td>
-		</tr>
-	</table>
+<center>
+    	<%= link_to 'Log in with Facecbook', 'auth/facebook', class: "loginBtn loginBtn--facebook"%>
+	    <%= link_to 'Log in with G+', 'auth/google_oauth2', class: "loginBtn loginBtn--google" %>
+</center>
+<br><hr>
+     <center><h4>Hoặc</h4></center>
+
+<div class="container">
+	<div class="field">
+			<label><b>Email</b></label>
+			<%= f.email_field :email, :required => true, class: "form-control" %>
+	</div>
+	<div class="field">
+			<label><b>Password</b></label>
+			<%= f.password_field :password, :required => true, class: "form-control" %>
+	</div><br>
+	<div class="actions">
+    <center>
+			<%= f.submit "Log in", class: "btn btn-primary" %>
+	</center>
+    </div>
+</div>
 <% end %>
