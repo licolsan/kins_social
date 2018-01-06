@@ -1,25 +1,42 @@
-<center><label><h1>Log In Page</h1></label></center>
-<%= form_for :sess, url: 'login' do |f| %>
-<center>
-    	<%= link_to 'Log in with Facecbook', 'auth/facebook', class: "loginBtn loginBtn--facebook"%>
-	    <%= link_to 'Log in with G+', 'auth/google_oauth2', class: "loginBtn loginBtn--google" %>
-</center>
-<br><hr>
-     <center><h4>Hoặc</h4></center>
+<style>
+	body {
 
-<div class="container">
-	<div class="field">
-			<label><b>Email</b></label>
-			<%= f.email_field :email, :required => true, class: "form-control" %>
+	}
+</style>
+<div align="center">
+	<div style="width: 30%; margin-top: 150px">
+		<label><h1>Log In Page</h1></label>
+		<br/>
+		Log in to Open List or
+	  <%= link_to 'create an acount', sign_up_path, style: "color: #FF8662" %>
+		<br/><br/>
+		<small>Sign in using social media</small>
+		<%= form_for :sess, url: 'login' do |f| %>
+			<img src="icon/twitter.png" alt="twitter_icon" />
+			<%= link_to 'auth/facebook', class: "loginBtn loginBtn--facebook" do %>
+				<img src="icon/facebook.png" alt="facebook_icon" />
+			<% end %>
+		  <%= link_to 'auth/google_oauth2', class: "loginBtn loginBtn--google" do %>
+		  	<img src="icon/google.png" alt="google_icon" />
+		  <% end %>
+			<br><br>
+			<small>or Sign in using email address</small>
+			<br/><br/>
+			<div class="input-group" style="width: 60%">
+				<%= f.email_field :email, :required => true, class: "form-control", placeholder: "Email" %><br/><br/>
+				<%= f.password_field :password, :required => true, class: "form-control", placeholder: "Password" %>
+			</div>
+			<div class="row" style="width: 58%">
+				<div style="float: left;">
+					<input type="checkbox" name="remember" value="true">
+					Remember me
+				</div>
+				<div style="float: right;">
+					<a href="">Forgot password?</a>
+				</div>
+			</div>
+			<br/>
+			<%= f.submit "Log in", class: "btn btn-warning", style: "width: 60%; background-color: #FF8662" %>
+		<% end %>
 	</div>
-	<div class="field">
-			<label><b>Password</b></label>
-			<%= f.password_field :password, :required => true, class: "form-control" %>
-	</div><br>
-	<div class="actions">
-    <center>
-			<%= f.submit "Log in", class: "btn btn-primary" %>
-	</center>
-    </div>
 </div>
-<% end %>

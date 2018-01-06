@@ -10,7 +10,7 @@
 			</dir>
 			<% if !current_user.is_friend?(user) %>
 				<dir class="col-xs-2">
-					<%= link_to "Send friend request", friend_request_path(user), method: :post, class: "btn btn-primary" %>
+					<%= link_to "Send friend request", friend_request_path(user), method: :post, class: "btn btn-primary login" %>
 				</dir>
 			<% end %>
 		</div>

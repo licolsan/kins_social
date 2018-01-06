@@ -20,27 +20,12 @@
 	  	<%= flash[:notice] %>
 	  <% end %>
 	  <% if current_user %>
-	  	<div style="">
-	  		<div style="width: 100%; height: 200px">
-		  		<img src="<%= current_user.cover_photo %>" alt="your-cover-photo" style="width: 100%; height: 100%;" />
-		  	</div>
-		  	<div align="center">
-		  		<img src="<%= current_user.avatar %>" alt="your-avatar" style="width: 300px; height: 200px;" />
-		  	</div>
-	  	</div>
 	  	<ul>
 	  		<li>Log in as <%= current_user.name %></li>
 	  		<li><%= link_to 'Edit profile', edit_user_path(current_user) %></li>
 	  		<li><%= link_to 'My friend(s)', friend_ships_path %></li>
 	  		<li><%= link_to 'Users', users_path %></li>
 	  		<li><%= link_to 'Log out', log_out_path, :method => :delete %></li>
-	  	</ul>
-	  <% else %>
-	  	<ul>
-	  		<li><%= link_to 'Sign up', sign_up_path %></li>
-	  		<li><%= link_to 'Log in', log_in_path %></li>
-	  		<li><%= link_to 'Log in with Facecbook', 'auth/facebook' %></li>
-	  		<li><%= link_to 'Log in with G+', 'auth/google_oauth2' %></li>
 	  	</ul>
 	  <% end %>
     <%= yield %>
