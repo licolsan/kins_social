@@ -16,18 +16,119 @@
   </head>
 
   <body>
-	  <% if flash[:notice] %>
-	  	<%= flash[:notice] %>
-	  <% end %>
 	  <% if current_user %>
-	  	<ul>
-	  		<li>Log in as <%= current_user.name %></li>
-	  		<li><%= link_to 'Edit profile', edit_user_path(current_user) %></li>
-	  		<li><%= link_to 'My friend(s)', friend_ships_path %></li>
-	  		<li><%= link_to 'Users', users_path %></li>
-	  		<li><%= link_to 'Log out', log_out_path, :method => :delete %></li>
-	  	</ul>
+			<nav class="navbar navbar-default nav_bar">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-10">
+					<div class="container-fluid">
+				    <div class="navbar-header">
+				    	<img src="icon/brand.png" alt="brand_icon" />
+				    </div>
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <div class="navbar-form navbar-left">
+				      	<ul class="nav navbar-nav">
+				      		<li><%= link_to "HOME", root_path %></li>
+				      		<li><a href="">ALL PAGES</a></li>
+				      		<li><a href="">SHORTCODES</a></li>
+				      		<li><a href="">ALL ELEMENT</a></li>
+				      	</ul>
+				      	<div class="input-group">
+					      	<!-- <a href="">
+					          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+					        </a> -->
+					        <input type="text" class="form-control search_something" placeholder="Search for anything" />
+				      	</div>
+								<button type="button" class="btn btn-warning add_post_home">
+				          <span class="glyphicon glyphicon-plus"></span> ADD POST
+				        </button>
+				      </div>
+				      <div class="navbar-form navbar-right">
+				      	<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation pink_noti"><%= all_friend_request %></span>
+								  		<span class="glyphicon glyphicon-user glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+									  <div class="container">
+									  	<li>
+									  		All requests
+									  		<%= link_to "View all users" , users_path, class: "btn btn-primary" %>
+									  	</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+										<% all_waiters.each do |waiter| %>
+											<div class="row" style="margin-bottom: 10px">
+												<div class="col-xs-1"></div>
+												<div class="col-xs-2">
+													<img src="<%= waiter.avatar %>" alt="friend_avatar" style="width: 40px; height: 40px"/>
+												</div>
+												<div class="col-xs-4">
+													<%= waiter.name %>	
+												</div>
+												<div class="col-xs-2">
+													<%= link_to 'Accept', accept_path(waiter), method: :post, class: "btn btn-success" %>
+												</div>
+												<div class="col-xs-2">
+													<%= link_to 'Deny', deny_path(waiter), method: :delete, class: "btn btn-danger" %>
+												</div>
+											</div>
+										<% end %>
+										<li><%= link_to "CHECK ALL FOLLOW REQUEST", friend_ships_path, class: "btn btn-info check_all_request" %></li>
+								  </ul>
+								</div>
+								<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation green_noti" "></span>
+								  		<span class="glyphicon glyphicon-comment glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+										<div class="container">
+									  	<li>All messages</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+								  </ul>
+								</div>
+				      	<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation orange_noti"></span>
+								  		<span class="glyphicon glyphicon-bell glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+										<div class="container">
+									  	<li>All notifications</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+								  </ul>
+								</div>
+								<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<img src="<%= current_user.avatar %>" alt="avatar" class="img-circle img_avatar" />
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu">
+										<li><%= link_to 'Edit profile', edit_user_path(current_user) %></li>
+							  		<li><%= link_to 'Log out', log_out_path, :method => :delete %></li>
+								  </ul>
+								</div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div class="col-xs-1"></div>
+			</nav>
+		<% end %>
+	  <% if flash[:notice] %>
+	  	<div class="alert-info" align="center">
+	  		<%= flash[:notice] %>
+	  	</div>
 	  <% end %>
     <%= yield %>
-  </body>
+	</body>
 </html>

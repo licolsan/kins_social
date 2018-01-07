@@ -14,5 +14,60 @@
  *= require_self
  */
 @import "bootstrap-sprockets";
-@import "bootstrap"
+@import "bootstrap";
 
+.nav_bar {
+	background-color: #283344;
+}
+
+.search_something {
+	background-color: #323F56;
+	border-style: none;
+	color: white;
+}
+
+.add_post_home {
+	background-color: #FF8662;
+	color: white;
+	border-style: none;
+}
+
+.check_all_request {
+	background-color: #FF62C1;
+}
+
+.num_of_notificcation {
+	position: absolute;
+	right: 10px;
+	top: 1px; 
+	color: white;
+	border-radius: 15px;
+	width: 20px;
+	text-align: center;
+}
+
+.pink_noti {
+	background-color: red;
+}
+
+.green_noti {
+	background-color: green;
+}
+
+.orange_noti {
+	background-color: orange;
+}
+
+.glyphicon_noti {
+	width: 50px;
+	font-size: 25px;
+}
+
+.img_avatar {
+	width: 40px;
+	height: 40px;
+}
+
+.dropdown_menu {
+	width: 350px;
+}

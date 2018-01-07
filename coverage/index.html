@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2018-01-05T16:05:35+07:00">2018-01-05T16:05:35+07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2018-01-07T16:19:50+07:00">2018-01-07T16:19:50+07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.58
+         1.61
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>38</b> files in total.
-    <b>423</b> relevant lines. 
-    <span class="green"><b>423</b> lines covered</span> and
+    <b>440</b> relevant lines. 
+    <span class="green"><b>440</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -63,11 +63,11 @@
       <tr>
         <td class="strong"><a href="#4a5c4f701eee8920a8e418b50bdc5ddf33dfe490" class="src_link" title="app/controllers/application_controller.rb">app/controllers/application_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
+        <td>24</td>
         <td>14</td>
-        <td>8</td>
-        <td>8</td>
+        <td>14</td>
         <td>0</td>
-        <td>7.1</td>
+        <td>4.6</td>
       </tr>
       
       <tr>
@@ -207,7 +207,7 @@
         <td>60</td>
         <td>60</td>
         <td>0</td>
-        <td>3.8</td>
+        <td>4.1</td>
       </tr>
       
       <tr>
@@ -301,16 +301,6 @@
       </tr>
       
       <tr>
-        <td class="strong"><a href="#c1edd37a76003901f91179e9a17786465404db7e" class="src_link" title="config/initializers/fog.rb">config/initializers/fog.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>16</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0.0</td>
-      </tr>
-      
-      <tr>
         <td class="strong"><a href="#e06f2e57f5ba74a9d7d32e9c89186ce8e113c38a" class="src_link" title="config/initializers/inflections.rb">config/initializers/inflections.rb</a></td>
         <td class="green strong">100.0 %</td>
         <td>16</td>
@@ -362,6 +352,16 @@
       
       <tr>
         <td class="strong"><a href="#61c55377f2fe00b0c46af087f41cf6e90847f338" class="src_link" title="spec/controllers/account_activations_controller_spec.rb">spec/controllers/account_activations_controller_spec.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>16</td>
+        <td>11</td>
+        <td>11</td>
+        <td>0</td>
+        <td>1.0</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#e3f3a753f1c8753dd1d64f0387a2e500affc2a61" class="src_link" title="spec/controllers/application_controller_spec.rb">spec/controllers/application_controller_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
         <td>16</td>
         <td>11</td>
@@ -554,8 +554,8 @@
     <h3>app/controllers/application_controller.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>8</b> relevant lines. 
-      <span class="green"><b>8</b> lines covered</span> and
+      <b>14</b> relevant lines. 
+      <span class="green"><b>14</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -584,7 +584,7 @@
         <li class="covered" data-hits="1" data-linenumber="4">
           <span class="hits">1</span>
           
-          <code class="ruby">  helper_method :current_user</code>
+          <code class="ruby">  helper_method :current_user, :all_friend_request, :all_waiters</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="5">
@@ -602,13 +602,13 @@
         <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
-          <code class="ruby">  def current_user</code>
+          <code class="ruby">  def all_friend_request</code>
         </li>
       
-        <li class="covered" data-hits="38" data-linenumber="8">
-          <span class="hits">38</span>
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
           
-          <code class="ruby">  	@user ||= User.find(session[:user_id]) if session[:user_id]</code>
+          <code class="ruby">		@all_friend_request ||= current_user.get_waiter_number if current_user.get_waiter_number &gt; 0</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="9">
@@ -626,22 +626,82 @@
         <li class="covered" data-hits="1" data-linenumber="11">
           <span class="hits">1</span>
           
-          <code class="ruby">  def require_user</code>
+          <code class="ruby">  private</code>
         </li>
       
-        <li class="covered" data-hits="13" data-linenumber="12">
-          <span class="hits">13</span>
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
           
-          <code class="ruby">  	redirect_to log_in_path unless current_user</code>
+          <code class="ruby">  def all_waiters</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="13">
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  	@waiters ||= current_user.get_waiters</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="14">
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def current_user</code>
+        </li>
+      
+        <li class="covered" data-hits="40" data-linenumber="18">
+          <span class="hits">40</span>
+          
+          <code class="ruby">  	@user ||= User.find(session[:user_id]) if session[:user_id]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="19">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def require_user</code>
+        </li>
+      
+        <li class="covered" data-hits="13" data-linenumber="22">
+          <span class="hits">13</span>
+          
+          <code class="ruby">  	redirect_to log_in_path unless current_user</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
           
           
           <code class="ruby">end</code>
@@ -2155,8 +2215,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="9">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="9">
+          <span class="hits">3</span>
           
           <code class="ruby">	has_many :friend_ship_waiters,-&gt; { where(status: 0) }, class_name: &quot;FriendShip&quot;, foreign_key: :receiver_id, dependent: :destroy</code>
         </li>
@@ -2389,8 +2449,8 @@
           <code class="ruby">	def User.digest(string)</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="48">
-          <span class="hits">31</span>
+        <li class="covered" data-hits="33" data-linenumber="48">
+          <span class="hits">33</span>
           
           <code class="ruby">		BCrypt::Password.create(string)</code>
         </li>
@@ -2413,8 +2473,8 @@
           <code class="ruby">	def User.new_token</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="52">
-          <span class="hits">31</span>
+        <li class="covered" data-hits="33" data-linenumber="52">
+          <span class="hits">33</span>
           
           <code class="ruby">		SecureRandom.urlsafe_base64</code>
         </li>
@@ -2473,8 +2533,8 @@
           <code class="ruby">	def downcase_email</code>
         </li>
       
-        <li class="covered" data-hits="33" data-linenumber="62">
-          <span class="hits">33</span>
+        <li class="covered" data-hits="35" data-linenumber="62">
+          <span class="hits">35</span>
           
           <code class="ruby">		self.email = email.downcase</code>
         </li>
@@ -2497,14 +2557,14 @@
           <code class="ruby">	def create_activation_digest</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="66">
-          <span class="hits">31</span>
+        <li class="covered" data-hits="33" data-linenumber="66">
+          <span class="hits">33</span>
           
           <code class="ruby">		self.activation_token = User.new_token</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="67">
-          <span class="hits">31</span>
+        <li class="covered" data-hits="33" data-linenumber="67">
+          <span class="hits">33</span>
           
           <code class="ruby">		self.activation_digest = User.digest(activation_token)</code>
         </li>
@@ -2695,8 +2755,8 @@
           <code class="ruby">	def get_waiters</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="99">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="99">
+          <span class="hits">4</span>
           
           <code class="ruby">		self.waiters</code>
         </li>
@@ -2719,8 +2779,8 @@
           <code class="ruby">	def get_waiter_number</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="103">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="103">
+          <span class="hits">2</span>
           
           <code class="ruby">		return get_waiters.size</code>
         </li>
@@ -3789,121 +3849,6 @@
 </div>
 
       
-        <div class="source_table" id="c1edd37a76003901f91179e9a17786465404db7e">
-  <div class="header">
-    <h3>config/initializers/fog.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
-    <div>
-      <b>0</b> relevant lines. 
-      <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
-    </div>
-  </div>
-  
-  <pre>
-    <ol>
-      
-        <li class="never" data-hits="" data-linenumber="1">
-          
-          
-          <code class="ruby"># CarrierWave.configure do |config|</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="2">
-          
-          
-          <code class="ruby"># 	if Rails.env.development? || Rails.env.test?</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="3">
-          
-          
-          <code class="ruby"># 		config.storage = :file</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="4">
-          
-          
-          <code class="ruby"># 	end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="5">
-          
-          
-          <code class="ruby"># 	if Rails.env.production?</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="6">
-          
-          
-          <code class="ruby"># 		config.storage = :fog</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="7">
-          
-          
-          <code class="ruby"># 	end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="8">
-          
-          
-          <code class="ruby"># 	config.fog_credentials = {</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="9">
-          
-          
-          <code class="ruby"># 		:provider =&gt; &#39;AWS&#39;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="10">
-          
-          
-          <code class="ruby"># 		:aws_access_key_id =&gt; &#39;AKIAJJBC3H34H5XE36UQ&#39;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="11">
-          
-          
-          <code class="ruby"># 		:aws_secret_access_key =&gt; &#39;8HaDwpJY3WroFwCJiXDS7PCvMbQl+X563sQQM2Hs&#39;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="12">
-          
-          
-          <code class="ruby"># 	}</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="13">
-          
-          
-          <code class="ruby"># 	config.fog_directory = &#39;my_uploads&#39;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="14">
-          
-          
-          <code class="ruby"># 	# config.fog_public = false</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="15">
-          
-          
-          <code class="ruby"># 	config.fog_authenticated_url_expiration = 1.minute</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="16">
-          
-          
-          <code class="ruby"># end</code>
-        </li>
-      
-    </ol>
-  </pre>
-</div>
-
-      
         <div class="source_table" id="e06f2e57f5ba74a9d7d32e9c89186ce8e113c38a">
   <div class="header">
     <h3>config/initializers/inflections.rb</h3>
@@ -4461,6 +4406,121 @@
           <span class="hits">1</span>
           
           <code class="ruby">			expect(User.find(@user.id).activated).to eq false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
+          <code class="ruby">		end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">	end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="e3f3a753f1c8753dd1d64f0387a2e500affc2a61">
+  <div class="header">
+    <h3>spec/controllers/application_controller_spec.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>11</b> relevant lines. 
+      <span class="green"><b>11</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require &#39;rails_helper&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">RSpec.describe ApplicationController, type: :controller do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">	context &quot;Load all data on home page&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
+          
+          <code class="ruby">		it &quot;number of friend request&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
+          
+          <code class="ruby">			user = User.create(provider: &quot;abc&quot;, uid: &quot;abc&quot;, name: &quot;abc&quot;, email: &quot;a@a&quot;, password: &quot;123&quot;, password_confirmation: &quot;123&quot;, activated: true)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="7">
+          <span class="hits">1</span>
+          
+          <code class="ruby">			session[:user_id] = user.id</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
+          
+          <code class="ruby">			subject.send(:all_friend_request)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby">		end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="10">
+          <span class="hits">1</span>
+          
+          <code class="ruby">		it &quot;get waiters&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
+          
+          <code class="ruby">			user = User.create(provider: &quot;abc&quot;, uid: &quot;abc&quot;, name: &quot;abc&quot;, email: &quot;a@a&quot;, password: &quot;123&quot;, password_confirmation: &quot;123&quot;, activated: true)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
+          
+          <code class="ruby">			session[:user_id] = user.id</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">			subject.send(:all_waiters)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="14">
