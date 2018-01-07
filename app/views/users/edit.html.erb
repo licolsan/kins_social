@@ -1,52 +1,58 @@
-<h1>Your profile</h1>
+<div class="cover_photo">
+	<img src="<%= @user.cover_photo %>" alt="cover_photo" />
+</div>
+<table>
+	<tr>
+		<td>
+			<div class="avatar">
+				<img src="<%= @user.avatar %>" alt="avatar" class="img-circle" />
+			</div>
+		</td>
+		<td>
+			<h3><%= @user.name %></h3>
+		</td>
+	</tr>
+</table>
 
-<%= form_for @user do |f| %>
-	<% if @user.errors.any? %>
-		<% @user.errors.full_messages.each do |mess| %>
-			<%= mess %>
+<div align="center">
+	<div>
+		<%= form_for @user do |f| %>
+			<% if @user.errors.any? %>
+				<% @user.errors.full_messages.each do |mess| %>
+					<%= mess %>
+				<% end %>
+			<% end %>
+			<div class="input-group input_group">
+				<label class="col-lg-2">Name</label>
+				<div class="col-lg-10">
+					<%= f.text_field :name, required: true, class: "form-control" %><br/><br/>
+				</div>
+			</div>
+			<div class="input-group input_group">
+				<label class="col-lg-2">Avatar</label>
+				<div class="col-lg-10">
+					<%= f.filestack_field :avatar, 'Upload your avatar', class: "form-control" %><br/><br/>
+				</div>
+			</div>
+			<div class="input-group input_group">
+				<label class="col-lg-2">Cover photo</label>
+				<div class="col-lg-10">
+					<%= f.filestack_field :cover_photo, 'Upload your cover photo', class: "form-control" %><br/><br/>
+				</div>
+			</div>
+			<div class="input-group input_group">
+				<label class="col-lg-2">Color</label>
+				<div class="col-lg-10">
+					<%= f.color_field :color, class: "form-control" %><br/><br/>
+				</div>
+			</div>
+			<div class="input-group input_group">
+				<label class="col-lg-2">Email</label>
+				<div class="col-lg-10">
+					<%= f.email_field :email, required: true, class: "form-control" %><br/><br/>
+				</div>
+			</div>
+			<%= f.submit "Update Profile", class: "btn btn-primary update_profile" %>
 		<% end %>
-	<% end %>
-	<table>
-		<tr>
-			<td>Name: </td>
-			<td><%= f.text_field :name, required: true %></td>
-		</tr>
-		<tr>
-			<td>Avatar: </td>
-			<td>
-				<div style="width: 300px; height: 200px">
-					<img src="<%= @user.avatar %>" alt="your_avatar" style="width: 100%; height: 100%" />
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><%= f.filestack_field :avatar, 'Upload your avatar' %></td>
-		</tr>
-		<tr>
-			<td>Cover photo: </td>
-			<td>
-				<div style="width: 300px; height: 200px">
-					<img src="<%= @user.cover_photo %>" alt="your_cover_photo" style="width: 100%; height: 100%" />
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><%= f.filestack_field :cover_photo, 'Upload your cover photo' %></td>
-		</tr>
-		<tr>
-			<td>Color: </td>
-			<td><%= f.color_field :color %></td>
-		</tr>
-		<tr>
-			<td>Email: </td>
-			<td><%= f.email_field :email, required: true %></td>
-		</tr>
-		
-		<tr>
-			<td></td>
-			<td><%= f.submit "Update Profile" %></td>
-		</tr>
-	</table>
-<% end %>
+	</div>
+</div>
