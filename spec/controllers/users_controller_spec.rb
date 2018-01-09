@@ -40,6 +40,20 @@ RSpec.describe UsersController, type: :controller do
 		end
 	end
 
+	context "Profile" do
+		it "my profile" do
+			user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+			session[:user_id] = user.id
+			get :show, :params => { id: user.id }
+		end
+		it "other profile" do
+			user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+			other_user = User.create(provider: "abc", uid: "cba", name: "cba", email: "b@b", password: "123", password_confirmation: "123", activated: true)
+			session[:user_id] = user.id
+			get :show, :params => { id: other_user.id }
+		end
+	end
+
 	it "List all user" do
 		user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
 		session[:user_id] = user.id

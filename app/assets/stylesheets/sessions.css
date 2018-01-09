@@ -1,4 +1,25 @@
-.login {
-	background-color: gray;
-	width: 90%
+.production_logo {
+	width: 120px;
+	height: 25px;
+}
+
+.login_form {
+	width: 40%;
+	margin-top: 150px
+}
+
+.input_field {
+	width: 60%;
+}
+
+.row_checkbox {
+	width: 50%;
+}
+
+.checkbox {
+	float: left;
+}
+
+.forgot_password {
+	float: right;
 }

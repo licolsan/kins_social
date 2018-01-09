@@ -1,10 +1,5 @@
-<style>
-	body {
-
-	}
-</style>
 <div align="center">
-	<div style="width: 30%; margin-top: 150px">
+	<div class="login_form">
 		<label><h1>Log In Page</h1></label>
 		<br/>
 		Log in to Open List or
@@ -12,26 +7,26 @@
 		<br/><br/>
 		<small>Sign in using social media</small>
 		<%= form_for :sess, url: 'login' do |f| %>
-			<img src="icon/twitter.png" alt="twitter_icon" />
+			<img src="icon/twitter.png" alt="twitter_icon" class="production_logo" />
 			<%= link_to 'auth/facebook', class: "loginBtn loginBtn--facebook" do %>
-				<img src="icon/facebook.png" alt="facebook_icon" />
+				<img src="icon/facebook.png" alt="facebook_icon" class="production_logo" />
 			<% end %>
 		  <%= link_to 'auth/google_oauth2', class: "loginBtn loginBtn--google" do %>
-		  	<img src="icon/google.png" alt="google_icon" />
+		  	<img src="icon/google.png" alt="google_icon" class="production_logo" />
 		  <% end %>
 			<br><br>
 			<small>or Sign in using email address</small>
 			<br/><br/>
-			<div class="input-group" style="width: 60%">
+			<div class="input-group input_field">
 				<%= f.email_field :email, :required => true, class: "form-control", placeholder: "Email" %><br/><br/>
 				<%= f.password_field :password, :required => true, class: "form-control", placeholder: "Password" %>
 			</div>
-			<div class="row" style="width: 58%">
-				<div style="float: left;">
+			<div class="row row_checkbox">
+				<div class="checkbox">
 					<input type="checkbox" name="remember" value="true">
 					Remember me
 				</div>
-				<div style="float: right;">
+				<div class="forgot_password">
 					<a href="">Forgot password?</a>
 				</div>
 			</div>

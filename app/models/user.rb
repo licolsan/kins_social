@@ -15,6 +15,14 @@ class User < ApplicationRecord
 	has_many :friend_ship_blocked_receivers,-> { where(status: 2) }, class_name: "FriendShip", foreign_key: :sender_id, dependent: :destroy
 	has_many :blocked_receivers, :through => :friend_ship_blocked_receivers, :source => :receiver, :foreign_key => :receiver_id
 
+	has_many :posts, dependent: :destroy
+
+	has_many :active_relationships, class_name: "FollowRelationship", foreign_key: "follower_id", dependent: :destroy
+	has_many :followings, :through => :active_relationships, :source => :followed
+
+	has_many :passive_relationships, class_name: "FollowRelationship", foreign_key: "followed_id", dependent: :destroy
+	has_many :followers, :through => :passive_relationships, :source => :follower
+
 	before_save :downcase_email
 	before_create :create_activation_digest
 
@@ -80,7 +88,7 @@ class User < ApplicationRecord
 	end
 
 	def is_friend?(stranger)
-		FriendShip.where("(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", self.id, stranger.id, stranger.id, self.id).size != 0
+		FriendShip.where("(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", self.id, stranger.id, stranger.id, self.id).size > 0
 	end
 
 	def get_friend_senders
@@ -113,5 +121,17 @@ class User < ApplicationRecord
 
 	def get_blocked_number
 		return (get_blocked_senders.size + get_blocked_receivers.size)
+	end
+
+	def get_followers
+		self.followers
+	end
+
+	def get_followings
+		self.followings
+	end
+
+	def is_following?(user)
+		FollowRelationship.where("follower_id = ? AND followed_id = ?", self.id, user.id).size > 0
 	end
 end

@@ -1,15 +1,104 @@
-<div class="cover_photo">
-	<img src="<%= @user_show.cover_photo %>" alt="cover_photo" />
+<% content_for :head do %>
+  <div class="cover_photo">
+  <img src="<%= @user_show.cover_photo %>" alt="cover_photo" />
+  </div>
+  <div class="row">
+    <div class="col-sm-12" style="background-color: white;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">&nbsp;</div>
+          <div class="col-sm-6" style="margin-top: 5px;" align="right">
+            <div class="row">
+              <div class="col-sm-2" style="font-size: 100%; opacity: 0.7;">
+                POSTS<br>
+                <h6 style="color: #0084B4; font-size: 150%;"><%= @user_show.posts.count %></h6>
+              </div>
+              <div class="col-sm-2" style="font-size: 100%; opacity: 0.7;">
+                FOLLOWERS<br>
+                <h6 style="color: #0084B4; font-size: 150%;"><%= @user_show.followers.count %></h6>
+              </div>
+              <% if @is_my_profile %>
+                <div class="col-sm-8" style="text-align: right; margin-top: 5px;">
+                  <%= link_to edit_user_path(current_user) do %>
+                    <li type="button" class="btn btn-default btn-sm" style="color: grey; opacity: 0.8; font-weight: bold;">
+                      EDIT PROFILE
+                    </li>
+                  <% end %>
+                </div>
+              <% else %>
+                <% if !current_user.is_friend?(@user_show) %>
+                  <%= link_to "Send friend request", friend_request_path(@user_show) , method: :post, class: "btn btn-success btn-sm" %>
+                <% else %>
+                  <%= link_to "Unfriend", unfriend_path(@user_show) , method: :delete, class: "btn btn-danger btn-sm" %>
+                <% end %>
+                <% if !current_user.is_following?(@user_show) %>
+                  <%= link_to "Follow", follow_path(@user_show), method: :post, class: "btn btn-primary btn-sm" %>
+                <% else %>
+                  <%= link_to "Unfollow", unfollow_path(@user_show), method: :delete, class: "btn btn-warning btn-sm" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>
+        <div class="avatar">
+          <img src="<%= @user_show.avatar %>" alt="avatar" class="img-circle" />
+        </div>
+      </td>
+      <td>
+        <div class="avatar_name">
+          <h3><%= @user_show.name %></h3>
+        </div>
+      </td>
+    </tr>
+  </table>
+<% end %>
+<% if @is_my_profile %>
+  <div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10 well">
+      <%= render 'posts/form' %>
+    </div>
+    <div class="col-xs-1"></div>
+  </div>
+<% end %>
+<% for @p in @posts %>
+  <div class="card post-panel row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10 well">
+      <div class="col-sm-2">
+        <img src="<%= @p.user.avatar %>" alt="user-image" class="img-circle avatar_post"></img>
+      </div>
+      <div class="col-sm-10">
+      	<span><%= current_user.name %></span>
+      	<span>- <%= @p.created_at.to_formatted_s(:short) %></span>
+        <div class="edit_delete_post">
+          <%= link_to "edit", edit_post_path(@p) %> | <%= link_to "delete", post_path(@p), method: :delete %>
+        </div>
+        <h3 class="post_title"><%= @p.title %></h3>
+        <p class="post_content"><%= @p.content %></p>
+      </div>
+    </div>
+    <dir class="col-xs-1"></dir>
+  </div>
+<% end %>
+<div class="card post-panel">
+  <div class="card-body row">
+    <div class="col-sm-12">
+      <center>
+      	<img src="" alt="image" height="25px" width="25px"></img>
+        <a href="#top">
+        	<p class="opacity: .7;">
+        		Back to top
+        		<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+        	</p>
+      	</a>
+    	</center>
+    </div>
+  </div>
 </div>
-<table>
-	<tr>
-		<td>
-			<div class="avatar">
-				<img src="<%= @user_show.avatar %>" alt="avatar" class="img-circle" />
-			</div>
-		</td>
-		<td>
-			<h3><%= @user_show.name %></h3>
-		</td>
-	</tr>
-</table>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :account_activations, only: [:edit]
   resources :users, except: [:new]
+  resources :posts, except: [:new]
   resources :friend_ships, only: [:index]
   post "friend_request/:id" => "friend_ships#create", as: "friend_request"
   post "accept/:id" => "friend_ships#accept", as: "accept"
@@ -18,6 +19,6 @@ Rails.application.routes.draw do
   delete "deny/:id" => "friend_ships#deny", as: "deny"
   delete "unfriend/:id" => "friend_ships#unfriend", as: "unfriend"
 
-  # unfriend_sender_path
-  # unfriend_receiver_path
+  post "follow/:id" => "follow_relationships#create", as: "follow"
+  delete "unfollow/:id" => "follow_relationships#destroy", as: "unfollow"
 end

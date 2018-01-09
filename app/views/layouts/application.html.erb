@@ -17,7 +17,7 @@
 
   <body>
 	  <% if current_user %>
-			<nav class="navbar navbar-default nav_bar">
+			<nav class="navbar navbar-default nav_bar navbar-fixed-top">
 				<div class="col-xs-1"></div>
 				<div class="col-xs-10">
 					<div class="container-fluid">
@@ -177,12 +177,72 @@
 				</div>
 				<div class="col-xs-1"></div>
 			</nav>
+			<div class="virtual_nav"></div>
+			<%= yield :head %>
+			<div class="row">
+				<div class="container">
+					<div class="col-sm-3 well">
+				    <div class="well">
+				      <p><a href="#">My Profile</a></p>
+				      <img src="" class="img-circle" height="65" width="65" alt="Avatar">
+				    </div>
+				    <div class="well">
+				      <p><a href="#">Interests</a></p>
+				      <p>
+				        <span class="label label-default">namews</span>
+				        <span class="label label-primary">W3Schools</span>
+				        <span class="label label-success">Labels</span>
+				        <span class="label label-info">Football</span>
+				        <span class="label label-warning">Gaming</span>
+				        <span class="label label-danger">Friends</span>
+				      </p>
+				    </div>
+				    <div class="alert alert-success fade in">
+				      <a href="" class="close" data-dismiss="alert" aria-label="close">×</a>
+				      <p><strong>Ey!</strong></p>
+				      People are looking at your profile. Find out who.
+				    </div>
+				    <p><a href="">Link</a></p>
+				    <p><a href="">Link</a></p>
+				    <p><a href="">Link</a></p>
+				  </div>
+				  <div class="col-xs-7">
+					  <% if flash[:notice] %>
+					  	<div class="alert-info" align="center">
+					  		<%= flash[:notice] %>
+					  	</div>
+					  <% end %>
+						<%= yield %>
+				  </div>
+				  <div class="col-xs-2 well">
+				    <div class="card">
+				      <div class="card-body">
+				        <h5 style="color: grey; font-size: 125%;">Who to follow</h5>
+				        <% for user in users do %>
+					        <% if !current_user.is_following?(user) %>
+					        	<p style="font-weight: bold; opacity: 0.85;" >
+					          	<%= link_to user.name, user_path(user)%>
+					          	<%= link_to "Follow", follow_path(user), method: :post, class: "btn btn-default btn-xs" %>
+					          </p>
+					        <% end %>
+				        <% end %>
+				      </div>
+				    </div>
+				      
+				    <div class="card">
+				      <div class="card-body">
+				        <p style="opacity: 0.5; font-size: 90%;">
+				        	© 2016 Flutter  About  Help  Terms  Privacy  Cookies  Ads Info  Brand  Blog  Status  Apps  Jobs  Advertise  Businesses  Media  Developers
+				        </p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		<% else %>
+			<div class="container">
+				<%= yield %>
+			</div>
 		<% end %>
-	  <% if flash[:notice] %>
-	  	<div class="alert-info" align="center">
-	  		<%= flash[:notice] %>
-	  	</div>
-	  <% end %>
-    <%= yield %>
 	</body>
 </html>

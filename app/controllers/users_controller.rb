@@ -7,6 +7,13 @@ class UsersController < ApplicationController
 
   def show
     @user_show = User.find(params[:id])
+    @posts = @user_show.posts
+    @post = Post.new
+    if @user_show == current_user
+      @is_my_profile = true
+    else
+      @is_my_profile = false
+    end
   end
   
   def new
@@ -14,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
   def update
@@ -22,7 +29,7 @@ class UsersController < ApplicationController
     @user.skip_password_validation = true
     if @user.update_attributes(user_params)
       flash[:notice] = "Your profile has been update!"
-      redirect_to root_url
+      redirect_to user_path
     else
       render 'edit'
     end

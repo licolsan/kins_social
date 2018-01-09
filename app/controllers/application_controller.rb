@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
-  helper_method :current_user, :all_friend_request, :all_waiters
+  helper_method :current_user, :all_friend_request, :all_waiters, :users
+
+  private
+  def users
+    @users ||= User.all_except(current_user).last(10)
+  end
 
   private
   def all_friend_request

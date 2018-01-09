@@ -12,5 +12,10 @@ RSpec.describe ApplicationController, type: :controller do
 			session[:user_id] = user.id
 			subject.send(:all_waiters)
 		end
+		it "get users" do
+			user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+			session[:user_id] = user.id
+			subject.send(:users)
+		end
 	end
 end
