@@ -3,16 +3,16 @@
 		<label><h1>Log In Page</h1></label>
 		<br/>
 		Log in to Open List or
-	  <%= link_to 'create an acount', sign_up_path, style: "color: #FF8662" %>
+	  <%= link_to 'create an acount', sign_up_path, class: "create_account" %>
 		<br/><br/>
 		<small>Sign in using social media</small>
 		<%= form_for :sess, url: 'login' do |f| %>
-			<img src="icon/twitter.png" alt="twitter_icon" class="production_logo" />
+			<%= image_tag("/icon/twitter.png", alt: "twitter_icon", class: "production_logo") %>
 			<%= link_to 'auth/facebook', class: "loginBtn loginBtn--facebook" do %>
-				<img src="icon/facebook.png" alt="facebook_icon" class="production_logo" />
+				<%= image_tag("/icon/facebook.png", alt: "facebook_icon", class: "production_logo") %>
 			<% end %>
 		  <%= link_to 'auth/google_oauth2', class: "loginBtn loginBtn--google" do %>
-		  	<img src="icon/google.png" alt="google_icon" class="production_logo" />
+		  	<%= image_tag("/icon/google.png", alt: "google_icon", class: "production_logo") %>
 		  <% end %>
 			<br><br>
 			<small>or Sign in using email address</small>
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<br/>
-			<%= f.submit "Log in", class: "btn btn-warning", style: "width: 60%; background-color: #FF8662" %>
+			<%= f.submit "Log in", class: "button_login btn" %>
 		<% end %>
 	</div>
 </div>

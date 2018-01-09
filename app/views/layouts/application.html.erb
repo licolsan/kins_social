@@ -22,7 +22,7 @@
 				<div class="col-xs-10">
 					<div class="container-fluid">
 				    <div class="navbar-header">
-				    	<img src="../icon/brand.png" alt="brand_icon" />
+				    	<%= image_tag("/icon/brand.png", alt: "brand_icon") %>
 				    </div>
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <div class="navbar-form navbar-left">
@@ -59,10 +59,10 @@
 									  </div>
 								  	<li role="separator" class="divider"></li>
 										<% all_waiters.each do |waiter| %>
-											<div class="row" style="margin-bottom: 10px">
+											<div class="row" class="record">
 												<div class="col-xs-1"></div>
 												<div class="col-xs-2">
-													<img src="<%= waiter.avatar %>" alt="friend_avatar" style="width: 40px; height: 40px"/>
+													<%= image_tag waiter.avatar, alt: "user_avatar", class: "user_avatar" %>
 												</div>
 												<div class="col-xs-4">
 													<%= link_to waiter.name, user_path(waiter) %>	
@@ -109,7 +109,7 @@
 								<div class="btn-group">
 								  <div data-toggle="dropdown">
 								  	<a href="">
-								  		<img src="<%= current_user.avatar %>" alt="avatar" class="img-circle img_avatar" />
+								  		<%= image_tag current_user.avatar, alt: "my_avatar", class: "img-circle img_avatar" %>
 								  	</a>
 								  </div>
 								  <ul class="dropdown-menu">
@@ -184,7 +184,7 @@
 					<div class="col-sm-3 well">
 				    <div class="well">
 				      <p><a href="#">My Profile</a></p>
-				      <img src="" class="img-circle" height="65" width="65" alt="Avatar">
+				      <%= image_tag( "", alt: "my_avatar", class: "img-circle img_avatar") %>
 				    </div>
 				    <div class="well">
 				      <p><a href="#">Interests</a></p>

@@ -100,7 +100,7 @@ class User < ApplicationRecord
 	end
 
 	def get_friend_number
-		return (get_friend_senders.size + get_friend_receivers.size)
+		(get_friend_senders.size + get_friend_receivers.size)
 	end
 
 	def get_waiters
@@ -108,7 +108,7 @@ class User < ApplicationRecord
 	end
 
 	def get_waiter_number
-		return get_waiters.size
+		get_waiters.size
 	end
 
 	def get_blocked_senders
@@ -120,7 +120,7 @@ class User < ApplicationRecord
 	end
 
 	def get_blocked_number
-		return (get_blocked_senders.size + get_blocked_receivers.size)
+		(get_blocked_senders.size + get_blocked_receivers.size)
 	end
 
 	def get_followers

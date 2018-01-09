@@ -1,26 +1,26 @@
 <% content_for :head do %>
   <div class="cover_photo">
-  <img src="<%= @user_show.cover_photo %>" alt="cover_photo" />
+  <%= image_tag @user_show.cover_photo, alt: "cover_photo" %>
   </div>
   <div class="row">
-    <div class="col-sm-12" style="background-color: white;">
+    <div class="col-sm-12 user_banner">
       <div class="container">
         <div class="row">
           <div class="col-sm-3">&nbsp;</div>
-          <div class="col-sm-6" style="margin-top: 5px;" align="right">
+          <div class="col-sm-6 banner_details" align="right">
             <div class="row">
-              <div class="col-sm-2" style="font-size: 100%; opacity: 0.7;">
+              <div class="col-sm-2 post_num_font">
                 POSTS<br>
-                <h6 style="color: #0084B4; font-size: 150%;"><%= @user_show.posts.count %></h6>
+                <h6 class="post_num"><%= @user_show.posts.count %></h6>
               </div>
-              <div class="col-sm-2" style="font-size: 100%; opacity: 0.7;">
+              <div class="col-sm-2 post_num_font">
                 FOLLOWERS<br>
-                <h6 style="color: #0084B4; font-size: 150%;"><%= @user_show.followers.count %></h6>
+                <h6 class="follower_count"><%= @user_show.followers.count %></h6>
               </div>
               <% if @is_my_profile %>
-                <div class="col-sm-8" style="text-align: right; margin-top: 5px;">
+                <div class="col-sm-8 edit_profile_button_div">
                   <%= link_to edit_user_path(current_user) do %>
-                    <li type="button" class="btn btn-default btn-sm" style="color: grey; opacity: 0.8; font-weight: bold;">
+                    <li type="button" class="btn btn-default btn-sm edit_profile_button">
                       EDIT PROFILE
                     </li>
                   <% end %>
@@ -47,7 +47,7 @@
     <tr>
       <td>
         <div class="avatar">
-          <img src="<%= @user_show.avatar %>" alt="avatar" class="img-circle" />
+          <%= image_tag @user_show.avatar, alt: "user_avatar", class: "img-circle" %>
         </div>
       </td>
       <td>
@@ -72,7 +72,7 @@
     <div class="col-xs-1"></div>
     <div class="col-xs-10 well">
       <div class="col-sm-2">
-        <img src="<%= @p.user.avatar %>" alt="user-image" class="img-circle avatar_post"></img>
+        <%= image_tag @p.user.avatar, alt: "user_avatar", class: "img-circle avatar_post" %>
       </div>
       <div class="col-sm-10">
       	<span><%= current_user.name %></span>
@@ -87,18 +87,4 @@
     <dir class="col-xs-1"></dir>
   </div>
 <% end %>
-<div class="card post-panel">
-  <div class="card-body row">
-    <div class="col-sm-12">
-      <center>
-      	<img src="" alt="image" height="25px" width="25px"></img>
-        <a href="#top">
-        	<p class="opacity: .7;">
-        		Back to top
-        		<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-        	</p>
-      	</a>
-    	</center>
-    </div>
-  </div>
-</div>
+
