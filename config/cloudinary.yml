@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: rails-licolsan-cloud
+  api_key: '122682556354612'
+  api_secret: AiIBvI9fq7-lflF3t6W1tVCr10Y
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: rails-licolsan-cloud
+  api_key: '122682556354612'
+  api_secret: AiIBvI9fq7-lflF3t6W1tVCr10Y
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: rails-licolsan-cloud
+  api_key: '122682556354612'
+  api_secret: AiIBvI9fq7-lflF3t6W1tVCr10Y
+  enhance_image_tag: true
+  static_image_support: false

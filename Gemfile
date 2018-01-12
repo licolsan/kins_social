@@ -30,14 +30,17 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook', '4.0.0.rc1'
+gem 'omniauth-google-oauth2', '0.2.9'
+# gem 'omniauth-oauth2', '1.1'
 gem 'rails-controller-testing'
 
 gem 'sendgrid-ruby'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'jquery-rails'
+gem 'carrierwave'
+gem 'cloudinary'
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
