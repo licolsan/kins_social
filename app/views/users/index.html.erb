@@ -3,7 +3,7 @@
 	<% @users.each do |user| %>
 		<div class="row user_list">
 			<div class="col-xs-1">
-				<%= image_tag user.avatar, alt: "user_avatar", class: "user_avatar" %>
+				<%= cl_image_tag user.avatar, alt: "user_avatar", class: "user_avatar" %>
 			</div>
 			<div class="col-xs-2">
 				<%= link_to user.name, user_path(user) %>

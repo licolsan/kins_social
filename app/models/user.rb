@@ -34,6 +34,7 @@ class User < ApplicationRecord
 	validates :password, :presence => true, unless: :skip_password_validation
 
 	mount_uploader :avatar, ImageUploader
+	mount_uploader :cover_photo, ImageUploader
 
 	scope :all_except, -> (user) { where.not(id: user.id) }
 

@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <div class="cover_photo">
-  <%= image_tag current_user.cover_photo, alt: "user_cover_photo" %>
+  <%= cl_image_tag current_user.cover_photo, alt: "user_cover_photo" %>
   </div>
   <div class="row">
     <div class="col-sm-12 user_banner">
@@ -27,7 +27,7 @@
     <tr>
       <td>
         <div class="avatar">
-          <%= cl_image_tag current_user.avatar_url, alt: "user_avatar", class: "img-circle" %>
+          <%= cl_image_tag current_user.avatar, alt: "user_avatar", class: "img-circle" %>
         </div>
       </td>
       <td>

@@ -4,7 +4,7 @@
 		<% @senders.each do |sender| %>
 			<div class="row" class="record">
 				<div class="col-xs-2">
-					<%= image_tag sender.avatar, alt: "user_avatar", class: "user_avatar" %>
+					<%= cl_image_tag sender.avatar, alt: "user_avatar", class: "user_avatar" %>
 				</div>
 				<div class="col-xs-4">
 					<%= link_to sender.name, user_path(sender) %>
@@ -20,7 +20,7 @@
 		<% @receivers.each do |receiver| %>
 			<div class="row" class="record">
 				<div class="col-xs-2">
-					<%= image_tag receiver.avatar, alt: "user_avatar", class: "user_avatar" %>
+					<%= cl_image_tag receiver.avatar, alt: "user_avatar", class: "user_avatar" %>
 				</div>
 				<div class="col-xs-4">
 					<%= link_to receiver.name, user_path(receiver) %>
@@ -39,7 +39,7 @@
 		<% @waiters.each do |waiter| %>
 			<div class="row" class="record">
 				<div class="col-xs-2">
-					<%= image_tag waiter.avatar, alt: "user_avatar", class: "user_avatar" %>
+					<%= cl_image_tag waiter.avatar, alt: "user_avatar", class: "user_avatar" %>
 				</div>
 				<div class="col-xs-4">
 					<%= link_to waiter.name, user_path(waiter) %>
@@ -58,7 +58,7 @@
 		<% @blocked_senders.each do |blocked_sender| %>
 			<div class="row" class="record">
 				<div class="col-xs-2">
-					<%= image_tag blocked_sender.avatar, alt: "user_avatar", class: "user_avatar" %>
+					<%= cl_image_tag blocked_sender.avatar, alt: "user_avatar", class: "user_avatar" %>
 				</div>
 				<div class="col-xs-4">
 					<%= blocked_sender.name %>
@@ -71,7 +71,7 @@
 		<% @blocked_receivers.each do |blocked_receiver| %>
 			<div class="row" class="record">
 				<div class="col-xs-2">
-					<%= image_tag blocked_receiver.avatar, alt: "user_avatar", class: "user_avatar" %>
+					<%= cl_image_tag blocked_receiver.avatar, alt: "user_avatar", class: "user_avatar" %>
 				</div>
 				<div class="col-xs-4">
 					<%= blocked_receiver.name %>
