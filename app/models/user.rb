@@ -33,6 +33,8 @@ class User < ApplicationRecord
 	validates :password, :confirmation => true
 	validates :password, :presence => true, unless: :skip_password_validation
 
+	mount_uploader :avatar, ImageUploader
+
 	scope :all_except, -> (user) { where.not(id: user.id) }
 
 	def self.sign_in_from_omniauth(auth)

@@ -27,7 +27,7 @@
     <tr>
       <td>
         <div class="avatar">
-          <%= image_tag current_user.avatar, alt: "user_avatar", class: "img-circle" %>
+          <%= cl_image_tag current_user.avatar_url, alt: "user_avatar", class: "img-circle" %>
         </div>
       </td>
       <td>
@@ -56,13 +56,13 @@
 			<div class="input-group input_group">
 				<label class="col-lg-2">Avatar</label>
 				<div class="col-lg-10">
-					<%= f.filestack_field :avatar, 'Upload your avatar', class: "form-control" %><br/><br/>
+					<%= f.file_field :avatar, class: "form-control" %><br/><br/>
 				</div>
 			</div>
 			<div class="input-group input_group">
 				<label class="col-lg-2">Cover photo</label>
 				<div class="col-lg-10">
-					<%= f.filestack_field :cover_photo, 'Upload your cover photo', class: "form-control" %><br/><br/>
+					<%= f.file_field :cover_photo, class: "form-control" %><br/><br/>
 				</div>
 			</div>
 			<div class="input-group input_group">

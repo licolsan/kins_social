@@ -65,13 +65,11 @@ class FriendShipsController < ApplicationController
 		@friendship = FriendShip.find_by("(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", params[:id], current_user.id, current_user.id, params[:id])
 	end
 
-	private
 	def create_follow_relationship
 		FollowRelationship.create(follower_id: current_user.id, followed_id: params[:id]) unless FollowRelationship.where(follower_id: current_user.id, followed_id: params[:id]).size > 0
 		FollowRelationship.create(follower_id: params[:id], followed_id: current_user.id) unless FollowRelationship.where(follower_id: params[:id], followed_id: current_user.id).size > 0
 	end
 
-	private
 	def delete_follow_relationship
 		active_relationship = FollowRelationship.where(follower_id: current_user.id, followed_id: params[:id])
 		passive_relationship = FollowRelationship.where(follower_id: params[:id], followed_id: current_user.id)
