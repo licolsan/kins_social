@@ -1,0 +1,25 @@
+<%= form_for @post do |f| %>
+  <% if @post.errors.any? %>
+    <div id="errors">
+      <h2>
+        <%= pluralize(@post.errors.count, "error")%> stopped this post from saving
+      </h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+       </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title, required: true, placeholder: "Write your own status!", class: "form-control" %>
+  </p>
+  <p>
+    <%= f.label :content %><br>
+    <%= f.text_area :content, required: true, placeholder: "Say somethings!", class: "form-control" %>
+  </p>
+  <p>
+    <%= f.submit class: "btn btn-primary form-control" %>
+  </p>
+<% end %>

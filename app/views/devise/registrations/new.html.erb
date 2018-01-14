@@ -1,0 +1,23 @@
+<div align="center">
+  <div class="form_sign_in">
+    <label><h1>Sign up</h1></label>
+    <br/>
+    Create a new account to Open List or
+    <%= link_to 'Sign in', new_session_path(resource_name), style: "color: #FF8662" %>
+    <br/><br/>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="alert-danger">
+        <%= devise_error_messages! %>
+      </div>
+      <div class="input-group" class="input_field">
+        <%= f.text_field :name, required: true, class: "form-control", placeholder: "Full Name" %><br/><br/>
+        <%= f.email_field :email, required: true, class: "form-control", placeholder: "Email" %><br/><br/>
+        <%= f.password_field :password, required: true, class: "form-control", placeholder: "Password" %><br/><br/>
+        <%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "Password confirmation" %><br/><br/>
+      </div>
+      <input type="checkbox" name="remember" value="true">
+      I accept the <a href="" style="color: #FF8662">Terms and Services</a><br/>
+      <%= f.submit "Sign in", class: "btn btn-warning", style: "width: 50%; background-color: #FF8662" %>
+    <% end %>
+  </div>
+</div>

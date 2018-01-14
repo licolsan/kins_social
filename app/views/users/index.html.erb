@@ -1,0 +1,37 @@
+<div class="container">
+	<h2>All User</h2>
+	<% @users.each do |user| %>
+		<div class="row user_list">
+			<div class="col-xs-1">
+				<%= cl_image_tag user.avatar, alt: "user_avatar", class: "user_avatar" %>
+			</div>
+			<div class="col-xs-2">
+				<%= link_to user.name, user_path(user) %>
+			</div>
+			<% if !current_user.is_friend?(user) %>
+				<div class="col-xs-2">
+					<%= link_to "Send friend request", friend_request_path(user), method: :post, class: "btn btn-primary login" %>
+				</div>
+				<% if !current_user.is_following?(user) %>
+					<div class="col-xs-2">
+						<%= link_to "Follow", follow_path(user), method: :post, class: "btn btn-success login" %>
+					</div>
+				<% else %>
+					<div class="col-xs-2">
+						<%= link_to "Unfollow", unfollow_path(user), method: :delete, class: "btn btn-danger login" %>
+					</div>
+				<% end %>
+			<% else %>
+				<% if !current_user.is_following?(user) %>
+					<div class="col-xs-2">
+						<%= link_to "Follow", follow_path(user), method: :post, class: "btn btn-success login" %>
+					</div>
+				<% else %>
+					<div class="col-xs-2">
+						<%= link_to "Unfollow", unfollow_path(user), method: :delete, class: "btn btn-danger login" %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+	<% end %>
+</div>

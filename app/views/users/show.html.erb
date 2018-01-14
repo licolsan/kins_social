@@ -1,0 +1,91 @@
+<% content_for :head do %>
+  <div class="cover_photo">
+  <%= cl_image_tag @user_show.cover_photo, alt: "cover_photo" %>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 user_banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">&nbsp;</div>
+          <div class="col-sm-6 banner_details" align="right">
+            <div class="row">
+              <div class="col-sm-2 post_num_font">
+                POSTS<br>
+                <h6 class="post_num"><%= @user_show.posts.count %></h6>
+              </div>
+              <div class="col-sm-2 post_num_font">
+                FOLLOWERS<br>
+                <h6 class="follower_count"><%= @user_show.followers.count %></h6>
+              </div>
+              <% if @is_my_profile %>
+                <div class="col-sm-8 edit_profile_button_div">
+                  <%= link_to edit_user_path(current_user) do %>
+                    <li type="button" class="btn btn-default btn-sm edit_profile_button">
+                      EDIT PROFILE
+                    </li>
+                  <% end %>
+                </div>
+              <% else %>
+                <% if !current_user.is_friend?(@user_show) %>
+                  <%= link_to "Send friend request", friend_request_path(@user_show) , method: :post, class: "btn btn-success btn-sm" %>
+                <% else %>
+                  <%= link_to "Unfriend", unfriend_path(@user_show) , method: :delete, class: "btn btn-danger btn-sm" %>
+                <% end %>
+                <% if !current_user.is_following?(@user_show) %>
+                  <%= link_to "Follow", follow_path(@user_show), method: :post, class: "btn btn-primary btn-sm" %>
+                <% else %>
+                  <%= link_to "Unfollow", unfollow_path(@user_show), method: :delete, class: "btn btn-warning btn-sm" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>
+        <div class="avatar">
+          <%= cl_image_tag @user_show.avatar, alt: "user_avatar", class: "img-circle" %>
+
+        </div>
+      </td>
+      <td>
+        <div class="avatar_name">
+          <h3><%= @user_show.name %></h3>
+        </div>
+      </td>
+    </tr>
+  </table>
+<% end %>
+<% if @is_my_profile %>
+  <div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10 well">
+      <%= render 'posts/form' %>
+    </div>
+    <div class="col-xs-1"></div>
+  </div>
+<% end %>
+<% for @p in @posts %>
+  <div class="card post-panel row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10 well">
+      <div class="col-sm-2">
+        <%= cl_image_tag @p.user.avatar, alt: "user_avatar", class: "img-circle avatar_post" %>
+      </div>
+      <div class="col-sm-10">
+      	<span><%= current_user.name %></span>
+      	<span>- <%= @p.created_at.to_formatted_s(:short) %></span>
+        <div class="edit_delete_post">
+          <%= link_to "edit", edit_post_path(@p) %> | <%= link_to "delete", post_path(@p), method: :delete %>
+        </div>
+        <h3 class="post_title"><%= @p.title %></h3>
+        <p class="post_content"><%= @p.content %></p>
+      </div>
+    </div>
+    <dir class="col-xs-1"></dir>
+  </div>
+<% end %>
+
