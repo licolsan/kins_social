@@ -93,4 +93,52 @@ class User < ApplicationRecord
 	def is_following?(user)
 		FollowRelationship.where("follower_id = ? AND followed_id = ?", self.id, user.id).size > 0
 	end
+
+	def is_friend?(stranger)
+		FriendShip.where("(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)", self.id, stranger.id, stranger.id, self.id).size > 0
+	end
+
+	def get_friend_senders
+		self.senders
+	end
+
+	def get_friend_receivers
+		self.receivers
+	end
+
+	def get_friend_number
+		(get_friend_senders.size + get_friend_receivers.size)
+	end
+
+	def get_waiters
+		self.waiters
+	end
+
+	def get_waiter_number
+		get_waiters.size
+	end
+
+	def get_blocked_senders
+		self.blocked_senders
+	end
+
+	def get_blocked_receivers
+		self.blocked_receivers
+	end
+
+	def get_blocked_number
+		(get_blocked_senders.size + get_blocked_receivers.size)
+	end
+
+	def get_followers
+		self.followers
+	end
+
+	def get_followings
+		self.followings
+	end
+
+	def is_following?(user)
+		FollowRelationship.where("follower_id = ? AND followed_id = ?", self.id, user.id).size > 0
+	end
 end

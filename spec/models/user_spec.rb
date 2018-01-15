@@ -20,4 +20,25 @@ RSpec.describe User, type: :model do
       expect(@user.is_following?(@other_user)).to eq false
     end
   end
+  it "Identify friend" do
+    user1 = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+    user2 = User.create(provider: "abc", uid: "abc", name: "cba", email: "b@b", password: "123", password_confirmation: "123", activated: true)
+    expect(user1.is_friend?(user2)).to eq false
+  end
+
+  context "Follow relationship" do
+    it "get follower list" do
+      user1 = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+      user1.get_followers
+    end
+    it "get following list" do
+      user1 = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+      user1.get_followings
+    end
+    it "check if is following" do
+      user1 = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123", password_confirmation: "123", activated: true)
+      user2 = User.create(provider: "abc", uid: "abc", name: "cba", email: "b@b", password: "123", password_confirmation: "123", activated: true)
+      expect(user1.is_following?(user2)).to eq false
+    end
+  end
 end

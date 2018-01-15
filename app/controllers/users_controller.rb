@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: [ :index, :edit, :update ]
-
   def index
     @users = User.all_except(current_user)
   end

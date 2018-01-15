@@ -1,13 +1,9 @@
 class PostsController < ApplicationController
   before_action :get_post, only: [ :edit, :update, :destroy ]
-
-	# def new 
- #     @post = Post.new
- #  end
     
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.id # assign the post to the user who created it.
+    @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "Create new post complete!"
     else
@@ -36,7 +32,7 @@ class PostsController < ApplicationController
   end
   
   private
-  def post_params # allows certain data to be passed via form.
+  def post_params
     params.require(:post).permit(:user_id, :title, :content)
   end
 

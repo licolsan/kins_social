@@ -23,8 +23,4 @@ class ApplicationController < ActionController::Base
   def all_waiters
   	@waiters ||= current_user.get_waiters
   end
-
-  def require_user
-  	redirect_to log_in_path unless current_user
-  end
 end
