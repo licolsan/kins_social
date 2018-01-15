@@ -43,7 +43,6 @@ class User < ApplicationRecord
   		user.uid = auth.uid
   		user.password = rand().to_s
   		user.skip_confirmation!
-  		# user.password = Devise.friendly_token[0,20]
   	end
   end
 
