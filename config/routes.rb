@@ -3,8 +3,16 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
   resources :users, except: [:new]
-  resources :posts, except: [:new]
+  resources :posts, except: [:new] do
+    resources :comments, only: [ :create ]
+    resources :reacts, only: [ :create ]
+  end
+  resources :comments, only: [ :edit, :update, :destroy ] do
+    resources :reacts, only: [ :create ]
+  end
+  resources :reacts, only: [ :edit, :update, :destroy ]
   resources :friend_ships, only: [:index]
+
   post "friend_request/:id" => "friend_ships#create", as: "friend_request"
   post "accept/:id" => "friend_ships#accept", as: "accept"
   post "block/:id" => "friend_ships#block", as: "block"

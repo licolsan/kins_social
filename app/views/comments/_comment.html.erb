@@ -1,0 +1,47 @@
+<div class="row">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-9">
+		<% if !@post.is_reacted_by(current_user) %>
+		  <%= link_to post_reacts_path(@post, react: { react_type: 1 }), method: :post do %>
+		    <span class="glyphicon glyphicon-thumbs-up not_react"></span>
+		    <span class="not_react"><%= @post.get_react_number %></span>
+		  <% end %>
+		<% else %>
+		  <%= link_to react_path(@post.reacts.find_by(user_id: current_user.id)), method: :delete do %>
+		    <span class="glyphicon glyphicon-thumbs-up reacted"></span>
+		    <span class="reacted"><%= @post.get_react_number %></span>
+		  <% end  %>
+		<% end %>
+		<span class="glyphicon glyphicon-comment"></span> <%= @post.get_comment_number %>
+	</div>
+</div>
+<% @post.get_comments.order("created_at asc").each do |comment| %>
+	<div class="row comment_record">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-1">
+			<%= cl_image_tag comment.user.avatar, alt: "user_avatar", class: "img-circle avatar_comment" %>
+		</div>
+		<div class="col-xs-8">
+			<p>
+				<strong><%= comment.user.name %>:</strong>
+				<%= comment.content %>
+		  </p>
+		  <% if !comment.is_reacted_by(current_user) %>
+			    <%= link_to comment_reacts_path(comment, react: { react_type: 1 }), method: :post do %>
+			      <span class="glyphicon glyphicon-thumbs-up not_react"></span>
+			      <span class="not_react"><%= comment.get_react_number %></span>
+			    <% end %>
+			  <% else %>
+			    <%= link_to react_path(comment.reacts.find_by(user_id: current_user.id)), method: :delete do %>
+			      <span class="glyphicon glyphicon-thumbs-up reacted"></span>
+			      <span class="reacted"><%= comment.get_react_number %></span>
+			    <% end  %>
+			  <% end %>
+			  <% if comment.is_belong_to(current_user) %>
+				  <%= link_to "edit", edit_comment_path(comment) %> |
+				  <%= link_to "elete", comment_path(comment), method: :delete, data: { confirm: "Are you sure to delete this comment?" } %>
+			  <% end %>
+		</div>
+	</div>
+<% end %>
+<%= render partial: "comments/form" %>

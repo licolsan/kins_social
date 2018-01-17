@@ -4,7 +4,7 @@ class FriendShipsController < ApplicationController
 	before_action :delete_follow_relationship, only: [ :unfriend, :block ]
 
 	def index
-		@senders = current_user.get_friend_senders
+		@blocked_senders = current_user.get_friend_senders
 		@receivers = current_user.get_friend_receivers
 		@friend_count = current_user.get_friend_number
 

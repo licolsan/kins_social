@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user_show = User.find(params[:id])
-    @posts = @user_show.posts
+    @posts = @user_show.posts.order("created_at desc")
     @post = Post.new
     if @user_show == current_user
       @is_my_profile = true
