@@ -39,7 +39,7 @@
 			  <% end %>
 			  <% if comment.is_belong_to(current_user) %>
 				  <%= link_to "edit", edit_comment_path(comment) %> |
-				  <%= link_to "elete", comment_path(comment), method: :delete, data: { confirm: "Are you sure to delete this comment?" } %>
+				  <%= link_to "delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure to delete this comment?" } %>
 			  <% end %>
 		</div>
 	</div>
