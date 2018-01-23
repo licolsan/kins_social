@@ -23,6 +23,7 @@
 
 .nav_bar {
 	background-color: #283344;
+	min-width: 1500px;
 }
 
 .search_something {
@@ -214,4 +215,8 @@
 
 .yield_content {
 	margin-top: 20px;
+}
+
+.non_responsive {
+	min-width: 1500px;
 }

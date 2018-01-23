@@ -13,7 +13,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="non_responsive">
 	  <% if current_user %>
 			<nav class="navbar navbar-default nav_bar navbar-fixed-top">
 				<div class="col-xs-1"></div>
@@ -31,9 +31,6 @@
 				      		<li><a href="">ALL ELEMENT</a></li>
 				      	</ul>
 				      	<div class="input-group">
-					      	<!-- <a href="">
-					          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-					        </a> -->
 					        <input type="text" class="form-control search_something" placeholder="Search for anything" />
 				      	</div>
 								<button type="button" class="btn btn-warning add_post_home">
@@ -184,7 +181,7 @@
 			<%= yield :head %>
 			<div class="row">
 				<div class="container">
-					<div class="col-sm-3 well message_hidden">
+					<div class="col-xs-3 well message_hidden">
 				    <div class="well">
 				      <p><a href="#">My Profile</a></p>
 				      <%= image_tag( "", alt: "my_avatar", class: "img-circle img_avatar") %>
