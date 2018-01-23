@@ -85,7 +85,12 @@
 								  </div>
 								  <ul class="dropdown-menu dropdown_menu">
 										<div class="container">
-									  	<li>All messages</li>
+									  	<li>
+									  		All messages
+									  		<% if current_user.senders.any? || current_user.receivers.any? %>
+									  			<%= link_to "View all messages" , user_channels_path(current_user.senders.first || current_user.receivers.first), method: :post, class: "btn btn-primary" %>
+									  		<% end %>
+									  	</li>
 									  </div>
 								  	<li role="separator" class="divider"></li>
 								  </ul>
@@ -179,7 +184,7 @@
 			<%= yield :head %>
 			<div class="row">
 				<div class="container">
-					<div class="col-sm-3 well">
+					<div class="col-sm-3 well message_hidden">
 				    <div class="well">
 				      <p><a href="#">My Profile</a></p>
 				      <%= image_tag( "", alt: "my_avatar", class: "img-circle img_avatar") %>
@@ -210,9 +215,11 @@
 					  		<%= flash[:notice] %>
 					  	</div>
 					  <% end %>
-						<%= yield %>
+					  <div class="yield_content">
+					  	<%= yield %>
+					  </div>
 				  </div>
-				  <div class="col-xs-2 well">
+				  <div class="col-xs-2 well message_hidden">
 				    <div class="card">
 				      <div class="card-body">
 				        <h5 style="color: grey; font-size: 125%;">Who to follow</h5>

@@ -1,0 +1,13 @@
+.messages {
+	height: 450px;
+	clear: both;
+}
+
+.people {
+	height: 640px;
+}
+
+.messenger {
+	border-bottom: 1px solid gray;
+	margin-bottom: 10px;
+}

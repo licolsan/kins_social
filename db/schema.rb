@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116032225) do
+ActiveRecord::Schema.define(version: 20180121013344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -40,6 +45,14 @@ ActiveRecord::Schema.define(version: 20180116032225) do
     t.index ["sender_id", "receiver_id"], name: "index_friend_ships_on_sender_id_and_receiver_id", unique: true
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "channel_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "content"
@@ -53,6 +66,13 @@ ActiveRecord::Schema.define(version: 20180116032225) do
     t.integer "post_id"
     t.integer "comment_id"
     t.integer "react_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "channel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

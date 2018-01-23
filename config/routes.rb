@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root 'pages#index'
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
-  resources :users, except: [:new]
-  resources :posts, except: [:new] do
+  resources :users, except: [ :new, :create, :destroy ] do
+    resources :channels, only: [ :show, :create ]
+  end
+  resources :posts, except: [ :new ] do
     resources :comments, only: [ :create ]
     resources :reacts, only: [ :create ]
   end
@@ -22,4 +24,6 @@ Rails.application.routes.draw do
 
   post "follow/:id" => "follow_relationships#create", as: "follow"
   delete "unfollow/:id" => "follow_relationships#destroy", as: "unfollow"
+
+  resources :messages, only: [ :create ]
 end
