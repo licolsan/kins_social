@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   delete "unfollow/:id" => "follow_relationships#destroy", as: "unfollow"
 
   resources :messages, only: [ :create ]
+  resources :channels, only: [ :new, :create, :show ]
 end

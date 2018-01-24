@@ -86,6 +86,7 @@
 									  		All messages
 									  		<% if current_user.senders.any? || current_user.receivers.any? %>
 									  			<%= link_to "View all messages" , user_channels_path(current_user.senders.first || current_user.receivers.first), method: :post, class: "btn btn-primary" %>
+									  			<%= link_to "Create messages group", new_channel_path %>
 									  		<% end %>
 									  	</li>
 									  </div>

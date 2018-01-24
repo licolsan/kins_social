@@ -5,6 +5,7 @@
 </style>
 <div class="row">
 	<div class="col-xs-4 well people">
+		Friends:
 		<% @senders.each do |sender| %>
 			<div class="row" class="record">
 				<div class="col-xs-4">
@@ -25,11 +26,19 @@
 				</div>
 			</div>
 		<% end %>
+		<% if @group_chats.size > 0 %>
+			<h3>Group chat</h3>
+			<%= render partial: "channels/group", collection: @group_chats.order(:id).limit(10), as: :group_chat %>
+		<% end %>
 	</div>
 	<div class="col-xs-1"></div>
 	<div class="col-xs-7 well">
 		<div class="messenger">
-			<h3><%= @other_user.name %></h3>
+			<% if @other_user %>
+				<h3><%= @other_user.name %></h3>
+			<% else %>
+				<h3><%= @channel.name %></h3>
+			<% end %>
 		</div>
 		<div id="messages" class="messages">
 			<% if @channel.messages.any? %>
