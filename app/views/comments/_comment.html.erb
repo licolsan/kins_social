@@ -27,20 +27,22 @@
 				<%= comment.content %>
 		  </p>
 		  <% if !comment.is_reacted_by(current_user) %>
-			    <%= link_to comment_reacts_path(comment, react: { react_type: 1 }), method: :post do %>
-			      <span class="glyphicon glyphicon-thumbs-up not_react"></span>
-			      <span class="not_react"><%= comment.get_react_number %></span>
-			    <% end %>
-			  <% else %>
-			    <%= link_to react_path(comment.reacts.find_by(user_id: current_user.id)), method: :delete do %>
-			      <span class="glyphicon glyphicon-thumbs-up reacted"></span>
-			      <span class="reacted"><%= comment.get_react_number %></span>
-			    <% end  %>
-			  <% end %>
-			  <% if comment.is_belong_to(current_user) %>
-				  <%= link_to "edit", edit_comment_path(comment) %> |
-				  <%= link_to "delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure to delete this comment?" } %>
-			  <% end %>
+		    <%= link_to comment_reacts_path(comment, react: { react_type: 1 }), method: :post do %>
+		      <span class="glyphicon glyphicon-thumbs-up not_react"></span>
+		      <span class="not_react"><%= comment.get_react_number %></span>
+		    <% end %>
+		  <% else %>
+		    <%= link_to react_path(comment.reacts.find_by(user_id: current_user.id)), method: :delete do %>
+		      <span class="glyphicon glyphicon-thumbs-up reacted"></span>
+		      <span class="reacted"><%= comment.get_react_number %></span>
+		    <% end  %>
+		  <% end %>
+		  <% if comment.is_belong_to(current_user) %>
+			  <%= link_to "edit", edit_comment_path(comment) %> |>
+		  <% end %>
+		  <% if comment.is_belong_to(current_user) || @post.user_id == current_user.id %>
+			  <%= link_to "delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure to delete this comment?" } %>
+		  <% end %>
 		</div>
 	</div>
 <% end %>
