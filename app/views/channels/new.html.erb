@@ -1,0 +1,35 @@
+<style type="text/css">
+	.message_hidden {
+		visibility: hidden;
+	}
+</style>
+<div class="row">
+	<div class="col-xs-4 well people">
+		<%= form_tag(channels_path	, method: "post") do %>
+			<%= text_field_tag :name	 %>
+			<% @senders.each do |sender| %>
+				<div class="row" class="record">
+					<div class="col-xs-4">
+						<%= cl_image_tag sender.avatar, alt: "user_avatar", class: "user_avatar" %>
+					</div>
+					<div class="col-xs-8">
+						<%= sender.name %>
+						<%= check_box_tag "user_id[]", sender.id %>
+					</div>
+				</div>
+			<% end %>
+			<% @receivers.each do |receiver| %>
+				<div class="row" class="record">
+					<div class="col-xs-4">
+						<%= cl_image_tag receiver.avatar, alt: "user_avatar", class: "user_avatar" %>
+					</div>
+					<div class="col-xs-8">
+						<%= receiver.name %>
+						<%= check_box_tag "user_id[]", receiver.id %>
+					</div>
+				</div>
+			<% end %>
+			<%= submit_tag "Create group chat", class: "btn btn-sm btn-success" %>
+		<% end %>
+	</div>
+</div>
