@@ -31,6 +31,8 @@ class User < ApplicationRecord
 	has_many :comments, dependent: :destroy
 	has_many :reacts, dependent: :destroy
 
+	has_many :reports, dependent: :destroy
+
 	mount_uploader :avatar, ImageUploader
 	mount_uploader :cover_photo, ImageUploader
 
