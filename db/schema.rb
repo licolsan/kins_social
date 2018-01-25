@@ -71,16 +71,17 @@ ActiveRecord::Schema.define(version: 20180125020210) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "subscriptions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "channel_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-
   create_table "reports", force: :cascade do |t|
     t.integer "post_id"
     t.integer "user_id"
     t.text "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "channel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

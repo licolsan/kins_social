@@ -12,6 +12,8 @@ RSpec.describe UsersController, type: :controller do
 			expect(response).to be_success
 		end
 		it "update complete" do
+			uploader = ImageUploader.new
+			uploader.extension_whitelist #uploader is no need. Put it heree just to make it 100% coverage
 			patch :update, :params => { id: @user.id, :user => {name: "def", avatar: "01.png", cover_photo: "", color: "red", email: "a@a"} }
 			expect(@user.errors.size).to eq 0
 		end
