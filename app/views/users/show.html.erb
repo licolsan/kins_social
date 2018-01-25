@@ -77,9 +77,22 @@
       <div class="col-sm-10">
       	<span><%= current_user.name %></span>
       	<span>- <%= @post.created_at.to_formatted_s(:short) %></span>
-        <div class="edit_delete_post">
-          <%= link_to "edit", edit_post_path(@post) %> | <%= link_to "delete", post_path(@post), method: :delete, data: { confirm: "Are you sure to delete this post?" } %>
-        </div>
+        <% if @post.user == current_user %>
+          <div class="edit_delete_post">
+            <%= link_to "edit", edit_post_path(@post) %> | <%= link_to "delete", post_path(@post), method: :delete, data: {confirm: "Are you sure to delete this post?"} %>
+          </div>
+        <% else %>
+          <div class="edit_delete_post">
+            <div class="btn-group">
+              <div data-toggle="dropdown">
+                <a href="">report</a>
+              </div>
+              <ul class="dropdown-menu dropdown_menu">
+                <%= render partial: "reports/form" %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
         <h3 class="post_title"><%= @post.title %></h3>
         <p class="post_content"><%= @post.content %></p>
       </div>
