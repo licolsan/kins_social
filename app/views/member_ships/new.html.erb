@@ -1,0 +1,49 @@
+<%= form_tag(group_member_ships_path(@group), method: "post") do %>
+	<% if @senders.size > 0 || @receivers.size > 0 %>
+		<% @senders.each do |sender| %>
+			<div class="row" class="record">
+				<div class="col-xs-4">
+					<%= cl_image_tag sender.avatar, alt: "user_avatar", class: "user_avatar img-circle" %>
+				</div>
+				<div class="col-xs-8">
+					<div class="row">
+						<div class="col-xs-7">
+							<%= sender.name %>
+						</div>
+						<div class="col-xs-5">
+							<% unless @group.has_member(sender) %>
+								<%= check_box_tag "user_id[]", sender.id %>
+							<% else %>
+								<%= link_to "Remove member", group_member_ship_path(@group, sender), method: :delete, data: { confirm: "Are you sure to remove this member?" }, class: "btn btn-sm btn-danger" %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+		<% @receivers.each do |receiver| %>
+			<div class="row" class="record">
+				<div class="col-xs-4">
+					<%= cl_image_tag receiver.avatar, alt: "user_avatar", class: "user_avatar img-circle" %>
+				</div>
+				<div class="col-xs-8">
+					<div class="row">
+						<div class="col-xs-7">
+							<%= receiver.name %>
+						</div>
+						<div class="col-xs-5">
+							<% unless @group.has_member(receiver) %>
+								<%= check_box_tag "user_id[]", receiver.id %>
+							<% else %>
+								<%= link_to "Remove member", group_member_ship_path(@group, receiver), method: :delete, data: { confirm: "Are you sure to remove this member?" }, class: "btn btn-sm btn-danger" %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+		<%= submit_tag "At friend to group", class: "btn btn-sm btn-primary form-control" %>
+	<% else %>
+		<h3>You have no friend</h3>
+	<% end %>
+<% end %>

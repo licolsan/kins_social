@@ -37,6 +37,9 @@ class User < ApplicationRecord
 
 	has_many :reports, dependent: :destroy
 
+	has_many :member_ships, dependent: :destroy
+	has_many :groups, through: :member_ships
+
 	mount_uploader :avatar, ImageUploader
 	mount_uploader :cover_photo, ImageUploader
 

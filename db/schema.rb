@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125020210) do
+ActiveRecord::Schema.define(version: 20180125064212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,26 @@ ActiveRecord::Schema.define(version: 20180125020210) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sender_id", "receiver_id"], name: "index_friend_ships_on_sender_id_and_receiver_id", unique: true
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.string "avatar"
+    t.string "cover_photo"
+    t.string "group_type"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "member_ships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.boolean "is_owner", default: false
+    t.boolean "is_admin", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "group_id"], name: "index_member_ships_on_user_id_and_group_id", unique: true
   end
 
   create_table "messages", force: :cascade do |t|

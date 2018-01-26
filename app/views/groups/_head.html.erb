@@ -1,0 +1,61 @@
+<% content_for :head do %>
+  <div class="cover_photo">
+  <% if @group.cover_photo? %>
+    <%= cl_image_tag @group.cover_photo, alt: "group_cover_photo" %>
+  <% else %>
+    <%= cl_image_tag("/default_cover_photo.jpg", alt: "group_cover_photo") %>
+  <% end %>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 user_banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">&nbsp;</div>
+          <div class="col-sm-6 banner_details" align="right">
+            <div class="row">
+              <div class="col-sm-2 post_num_font">
+                MEMBERS<br>
+                <h6 class="follower_count" "><%= @group.member_ships.count %></h6>
+              </div>
+              <% if @group.is_owned_by(current_user) %>
+                <div class="col-sm-10">
+                  <%= link_to edit_group_path(@group), class: "btn btn-primary btn-sm" do %>
+                      EDIT PROFILE OF GROUP
+                  <% end %>
+                  <%= link_to new_group_member_ship_path(@group) , class: "btn btn-success btn-sm" do %>
+                      ADD MEMBER
+                  <% end %>
+                  <%= link_to group_path(@group), method: :delete, data: { confirm: "Are you sure to delete this group?" }, class: "btn btn-danger btn-sm" do %>
+                      DELETE THIS GROUP
+                  <% end %>
+                </div>
+              <% elsif @group.has_member(current_user) %>
+                <%= link_to group_member_ship_path(@group, current_user), method: :delete, data: { confirm: "Are you sure to leave this group?" }, class: "btn btn-danger btn-sm" do %>
+                  LEAVE THIS GROUP
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>
+        <div class="avatar">
+        <% if @group.avatar.url %>
+          <%= cl_image_tag @group.avatar, alt: "group_avatar", class: "img-circle" %>
+        <% else %>
+          <%= image_tag("/default_avatar.jpeg", alt: "group_avatar", class: "img-circle") %>
+        <% end %>
+        </div>
+      </td>
+      <td>
+        <div class="avatar_name">
+          <h3><%= @group.name %></h3>
+        </div>
+      </td>
+    </tr>
+  </table>
+<% end %>
