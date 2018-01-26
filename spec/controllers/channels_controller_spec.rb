@@ -34,14 +34,29 @@ RSpec.describe ChannelsController, type: :controller do
 			expect(flash[:notice].size).to be > 0
 		end
 
-		it "group chat" do
+		it "group chat without name" do
 			@stranger = User.create(provider: "abc", uid: "cba", name: "cba", email: "c@c", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
 			channel = Channel.new
 			channel.save
 			channel.subscriptions.create(user_id: @user.id)
 			channel.subscriptions.create(user_id: @other_user.id)
 			channel.subscriptions.create(user_id: @stranger.id)
-			post :create, params: { user_id: [ @other_user.id, @stranger.id ] }
+			post :create, params: { name: "", user_id: [ @other_user.id, @stranger.id ] }
+			subscription_1 = Subscription.find_by(user_id: @user.id)
+			subscription_2 = Subscription.find_by(user_id: @other_user.id)
+			subscription_3 = Subscription.find_by(user_id: @stranger.id)
+			check_1 = subscription_1.channel_id == subscription_2.channel_id
+			check_2 = subscription_1.channel_id == subscription_3.channel_id
+			expect(check_1).to eq check_2
+		end
+		it "group chat with name" do
+			@stranger = User.create(provider: "abc", uid: "cba", name: "cba", email: "c@c", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
+			channel = Channel.new
+			channel.save
+			channel.subscriptions.create(user_id: @user.id)
+			channel.subscriptions.create(user_id: @other_user.id)
+			channel.subscriptions.create(user_id: @stranger.id)
+			post :create, params: { name: "My Friends", user_id: [ @other_user.id, @stranger.id ] }
 			subscription_1 = Subscription.find_by(user_id: @user.id)
 			subscription_2 = Subscription.find_by(user_id: @other_user.id)
 			subscription_3 = Subscription.find_by(user_id: @stranger.id)
