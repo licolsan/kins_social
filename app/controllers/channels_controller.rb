@@ -29,13 +29,18 @@ class ChannelsController < ApplicationController
         redirect_to user_channel_path(other_user, channel)
       else # for public chat
         channel = Channel.new
-        channel.name = params[:name]
-        channel.save
-        channel.subscriptions.create(user_id: current_user.id)
-        params[:user_id].each do |id|
-          channel.subscriptions.create(user_id: id)
+        if params[:name].size > 0
+          channel.name = params[:name]
+          channel.save
+          channel.subscriptions.create(user_id: current_user.id)
+          params[:user_id].each do |id|
+            channel.subscriptions.create(user_id: id)
+          end
+          redirect_to channel_path(channel)
+        else
+          flash[:notice] = "Please enter name"
+          redirect_to new_channel_path
         end
-        redirect_to channel_path(channel)
       end
     end
   end
