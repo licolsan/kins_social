@@ -15,7 +15,7 @@
 		<span class="glyphicon glyphicon-comment"></span> <%= @post.get_comment_number %>
 	</div>
 </div>
-<% @post.get_comments.order("created_at asc").each do |comment| %>
+<% @post.get_comments.includes(:user).where(users: { is_lock: false }).order("comments.created_at asc").each do |comment| %>
 	<div class="row comment_record">
 		<div class="col-xs-1"></div>
 		<div class="col-xs-1">

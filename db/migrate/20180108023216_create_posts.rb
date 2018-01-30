@@ -4,6 +4,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.string :title
       t.text :content
       t.integer :user_id
+      t.boolean :is_marked_remove, default: false
 
       t.timestamps
     end

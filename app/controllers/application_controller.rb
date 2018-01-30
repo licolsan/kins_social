@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
   def all_waiters
   	@waiters ||= current_user.get_waiters
   end
+
+  def require_admin
+    redirect_to root_path unless current_user.is_admin
+  end
 end

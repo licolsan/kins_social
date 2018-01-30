@@ -23,12 +23,25 @@
 				<% end %>
 			<% else %>
 				<% if !current_user.is_following?(user) %>
+					<div class="col-xs-2"></div>
 					<div class="col-xs-2">
 						<%= link_to "Follow", follow_path(user), method: :post, class: "btn btn-success login" %>
 					</div>
 				<% else %>
+					<div class="col-xs-2"></div>
 					<div class="col-xs-2">
 						<%= link_to "Unfollow", unfollow_path(user), method: :delete, class: "btn btn-danger login" %>
+					</div>
+				<% end %>
+			<% end %>
+			<% if current_user.is_admin %>
+				<% if user.is_lock %>
+					<div class="col-xs-2">
+						<%= link_to "Unlock", unlock_account_path(user), method: :post, class: "btn btn-warning" %>
+					</div>
+				<% else %>
+					<div class="col-xs-2">
+						<%= link_to "Lock", lock_account_path(user), method: :post, class: "btn btn-danger" %>
 					</div>
 				<% end %>
 			<% end %>

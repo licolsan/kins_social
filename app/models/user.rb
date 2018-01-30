@@ -47,7 +47,7 @@ class User < ApplicationRecord
 
 	scope :all_except, -> (user) { where.not(id: user.id) }
 
-	def self.form_omniauth(auth)
+	def self.from_omniauth(auth)
   	where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
   		user.name = auth.info.name
   		user.email = auth.info.email
@@ -104,5 +104,17 @@ class User < ApplicationRecord
 
 	def is_following?(user)
 		FollowRelationship.where("follower_id = ? AND followed_id = ?", self.id, user.id).size > 0
+	end
+
+	def active_for_authentication?
+		super && !self.is_lock
+	end
+
+	def lock
+		self.is_lock = true
+	end
+
+	def unlock
+		self.is_lock = false
 	end
 end

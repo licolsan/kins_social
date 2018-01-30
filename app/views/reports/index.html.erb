@@ -1,0 +1,45 @@
+<% unless (@report_posts.blank? && @marked_posts.blank?) %>
+	<% for @post in @report_posts %>
+	  <div class="card post-panel row">
+	    <div class="col-xs-1"></div>
+	    <div class="col-xs-10 well">
+	      <div class="col-xs-1">
+	      <%= cl_image_tag @post.user.avatar, alt: "user_avatar", class: "img-circle avatar_post" %>
+	      </div>
+	      <div class="col-xs-8">
+	      	<span><%= link_to @post.user.name, user_path(@post.user) %></span>
+	      	<span>- <%= @post.created_at.to_formatted_s(:short) %></span>
+	        <h3 class="post_title"><%= @post.title %></h3>
+	        <p class="post_content"><%= @post.content %></p>
+	        <%= render partial: "reports/report" %>
+	      </div>
+	      <div class="col-xs-2">
+	      	<%= link_to "Mark remove", mark_remove_path(@post), method: :post, class: "btn btn-sm btn-danger" %>
+        </div>
+	    </div>
+	  </div>
+	<% end %>
+
+	<% for @post in @marked_posts %>
+	  <div class="card post-panel row">
+	    <div class="col-xs-1"></div>
+	    <div class="col-xs-10 well">
+	      <div class="col-xs-1">
+	      <%= cl_image_tag @post.user.avatar, alt: "user_avatar", class: "img-circle avatar_post" %>
+	      </div>
+	      <div class="col-xs-8">
+	      	<span><%= link_to @post.user.name, user_path(@post.user) %></span>
+	      	<span>- <%= @post.created_at.to_formatted_s(:short) %></span>
+	        <h3 class="post_title"><%= @post.title %></h3>
+	        <p class="post_content"><%= @post.content %></p>
+	        <%= render partial: "reports/report" %>
+	      </div>
+	      <div class="col-xs-2">
+        	<%= link_to "Unmark remove", unmark_remove_path(@post), method: :post, class: "btn btn-sm btn-success" %>
+        </div>
+	    </div>
+	  </div>
+	<% end %>
+<% else %>
+	<h3 align="center" class="alert-danger">No report found!</h3>
+<% end %>

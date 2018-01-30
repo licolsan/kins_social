@@ -15,7 +15,7 @@
             <div class="row">
               <div class="col-sm-2 post_num_font">
                 POSTS<br>
-                <h6 class="post_num"><%= current_user.posts.count %></h6>
+                <h6 class="post_num"><%= current_user.posts.all_active.count %></h6>
               </div>
               <div class="col-sm-2 post_num_font">
                 FOLLOWERS<br>
@@ -49,9 +49,9 @@
 
 <div align="center">
 	<div>
-		<%= form_for current_user do |f| %>
-			<% if current_user.errors.any? %>
-				<% current_user.errors.full_messages.each do |mess| %>
+		<%= form_for @user do |f| %>
+			<% if @user.errors.any? %>
+				<% @user.errors.full_messages.each do |mess| %>
 					<%= mess %>
 				<% end %>
 			<% end %>

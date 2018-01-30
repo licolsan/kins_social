@@ -1,10 +1,17 @@
 class ReportsController < ApplicationController
-	before_action :find_post
+	before_action :find_post, except: [ :index ]
+	before_action :require_admin, only: [ :index ]
+	layout 'admin_application', only: [ :index ]
+
+	def index
+		@report_posts = Post.all_active.includes(:reports).where.not(reports: { reason: nil })
+		@marked_posts = Post.all_marked
+	end
 
 	def create
 		report = find_report(current_user)
 		if report
-			flash[:notice] = "You have benn report this post already!"
+			flash[:notice] = "You have been report this post already!"
 		else
 			report = @post.reports.new(report_params)
 			report.user_id = current_user.id
@@ -12,7 +19,7 @@ class ReportsController < ApplicationController
 				flash[:notice] = "Your report has been saved!"
 			else
 				flash[:notice] = "Your report meets incident!"
-			end	
+			end
 		end
 		redirect_back(fallback_location: root_path)
 	end

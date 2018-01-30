@@ -1,0 +1,25 @@
+<div class="row report_title">
+	<div class="col-xs-4"><b>Users</b></div>
+	<div class="col-xs-4"><b>Reasons</b></div>
+	<div class="col-xs-4"><b>Date</b></div>
+</div>
+<% for @report in @post.reports do %>
+	<div class="row report_record">
+		<div class="col-xs-4">
+			<div class="row">
+				<div class="col-xs-3">
+					<%= cl_image_tag @report.user.avatar, alt: "user_avatar", class: "img-circle avatar_post" %>
+				</div>
+				<div class="col-xs-9">
+					<%= link_to @report.user.name, user_path(@report.user) %>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-4">
+			<%= @report.reason %>
+		</div>
+		<div class="col-xs-4">
+			<%= @report.created_at.to_formatted_s(:short) %>
+		</div>
+	</div>
+<% end %>

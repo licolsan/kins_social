@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KinsSocial</title>
+
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    	body {
+    		background-color: <%= current_user.color if current_user %>;
+    	}
+    </style>
+  </head>
+
+  <body class="non_responsive">
+	  <% if current_user %>
+			<nav class="navbar navbar-default nav_bar navbar-fixed-top">
+				<div class="col-xs-1">
+					<span class="slide_bar" onclick="openNav()">&#9776;</span>
+				</div>
+				<div class="col-xs-10">
+					<div class="container-fluid">
+				    <div class="navbar-header">
+				    	<%= image_tag("/icon/brand.png", alt: "brand_icon") %>
+				    </div>
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <div class="navbar-form navbar-left">
+				      	<ul class="nav navbar-nav">
+				      		<li><%= link_to "HOME", root_path %></li>
+				      		<li><a href="">ALL PAGES</a></li>
+				      		<li><a href="">SHORTCODES</a></li>
+				      		<li><a href="">ALL ELEMENT</a></li>
+				      	</ul>
+				      	<div class="input-group">
+					        <input type="text" class="form-control search_something" placeholder="Search for anything" />
+				      	</div>
+								<button type="button" class="btn btn-warning add_post_home">
+				          <span class="glyphicon glyphicon-plus"></span> ADD POST
+				        </button>
+				      </div>
+				      <div class="navbar-form navbar-right">
+				      	<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation pink_noti"><%= all_friend_request %></span>
+								  		<span class="glyphicon glyphicon-user glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+									  <div class="container">
+									  	<li>
+									  		All requests
+									  		<%= link_to "View all users" , users_path, class: "btn btn-primary" %>
+									  	</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+										<% all_waiters.each do |waiter| %>
+											<div class="row" class="record">
+												<div class="col-xs-1"></div>
+												<div class="col-xs-2">
+													<%= cl_image_tag waiter.avatar, alt: "user_avatar", class: "user_avatar" %>
+												</div>
+												<div class="col-xs-4">
+													<%= link_to waiter.name, user_path(waiter) %>	
+												</div>
+												<div class="col-xs-2">
+													<%= link_to 'Accept', accept_path(waiter), method: :post, class: "btn btn-success" %>
+												</div>
+												<div class="col-xs-2">
+													<%= link_to 'Deny', deny_path(waiter), method: :delete, class: "btn btn-danger" %>
+												</div>
+											</div>
+										<% end %>
+										<li><%= link_to "CHECK ALL FOLLOW REQUEST", friend_ships_path, class: "btn btn-info check_all_request" %></li>
+								  </ul>
+								</div>
+								<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation green_noti" "></span>
+								  		<span class="glyphicon glyphicon-comment glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+										<div class="container">
+									  	<li>
+									  		<% if current_user.senders.any? || current_user.receivers.any? %>
+									  			<%= link_to "View all messages" , user_channels_path(current_user.senders.first || current_user.receivers.first), method: :post, class: "btn btn-primary btn-sm" %>
+									  			<%= link_to "Create messages group", new_channel_path, class: "btn btn-success btn-sm" %>
+									  		<% end %>
+									  	</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+								  </ul>
+								</div>
+				      	<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<span class="num_of_notificcation orange_noti"></span>
+								  		<span class="glyphicon glyphicon-bell glyphicon_noti"></span>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu dropdown_menu">
+										<div class="container">
+									  	<li>All notifications</li>
+									  </div>
+								  	<li role="separator" class="divider"></li>
+								  </ul>
+								</div>
+								<div class="btn-group">
+								  <div data-toggle="dropdown">
+								  	<a href="">
+								  		<%= cl_image_tag current_user.avatar, alt: "my_avatar", class: "img-circle img_avatar" %>
+								  	</a>
+								  </div>
+								  <ul class="dropdown-menu">
+								  	<li>
+								  		<%= link_to user_path(current_user) do %>
+								  			<span class="glyphicon glyphicon-user"></span>
+								  			My profile
+							  			<% end %>
+								  	</li>
+								  	<li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-folder-close"></span>
+								  			Saved Articles
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<%= link_to edit_user_path(current_user) do %>
+								  			<span class="glyphicon glyphicon-pencil"></span>
+								  			Edit profiles
+								  		<% end %>
+								  	</li>
+								  	<li role="separator" class="divider"></li>
+								  	<li>
+								  		<%= link_to groups_path do %>
+								  			<span class="glyphicon glyphicon-globe"></span>
+								  			Find groups page
+								  		<% end %>
+								  	</li>
+								  	<li>
+								  		<%= link_to new_group_path do %>
+								  			<span class="glyphicon glyphicon-globe"></span>
+								  			Create group page
+								  		<% end %>
+								  	</li>
+										<li role="separator" class="divider"></li>
+										<li>
+								  		<a href="">
+									  		<span class="glyphicon glyphicon-bell"></span>
+									  		Notification settings
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<a href="">
+									  		<span class="glyphicon glyphicon-lock"></span>
+									  		Change Password
+								  		</a>
+								  	</li>
+										<li role="separator" class="divider"></li>
+										<li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-cog"></span>
+								  			Settings
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-flag"></span>
+								  			Private Policy
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<a href="">
+								  			<span class="glyphicon glyphicon-stats"></span>
+								  			FAQ
+								  		</a>
+								  	</li>
+								  	<li>
+								  		<%= link_to destroy_user_session_path, :method => :delete do %>
+								  			<span class="glyphicon glyphicon-off"></span>
+								  			Log out
+								  		<% end %>
+								  	</li>
+								  </ul>
+								</div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div class="col-xs-1"></div>
+			</nav>
+			<div class="virtual_nav"></div>
+			<div id="mySidenav" class="sidenav">
+			  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			  <%= link_to "View report post", reports_path, class: "btn btn-sm btn-warning" %>
+			  <%= link_to "View users", users_path, class: "btn btn-sm btn-warning" %>
+			  
+			</div>
+			<div class="container" align="center">
+				<div class="alert-info">
+					<% if notice %>
+			  		<%= notice %>
+			  	<% end %>
+		  	</div>	
+		  	<div class="alert-danger">
+			  	<% if alert %>
+			  		<%= alert %>
+			  	<% end %>
+		  	</div>
+			</div>
+			<%= yield %>
+		<% else %>
+			<div class="container" align="center">
+				<div class="alert-info">
+					<% if notice %>
+			  		<%= notice %>
+			  	<% end %>
+		  	</div>	
+		  	<div class="alert-danger">
+			  	<% if alert %>
+			  		<%= alert %>
+			  	<% end %>
+		  	</div>
+				<%= yield %>
+			</div>
+		<% end %>
+	</body>
+</html>

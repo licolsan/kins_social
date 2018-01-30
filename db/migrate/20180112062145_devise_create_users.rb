@@ -10,6 +10,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :avatar
       t.string :cover_photo
       t.string :color
+      t.boolean :is_admin, default: false
+      t.boolean :is_lock, default: false
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 

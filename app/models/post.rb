@@ -8,8 +8,11 @@ class Post < ApplicationRecord
 	validates :title, presence: true
 	validates :content, presence: true, length: {maximum: 500}
 
+	scope :all_active, -> { where.not(is_marked_remove: true) }
+	scope :all_marked, -> { where(is_marked_remove: true) }
+
 	def get_comments
-		self.comments
+		self.comments.includes(:user).where(users: { is_lock: false })
 	end
 
 	def get_comment_number
@@ -21,6 +24,14 @@ class Post < ApplicationRecord
 	end
 
 	def get_react_number
-		self.reacts.count
+		self.reacts.includes(:user).where(users: { is_lock: false }).count
+	end
+
+	def mark_remove
+		self.is_marked_remove = true
+	end
+
+	def unmark_remove
+		self.is_marked_remove = false
 	end
 end

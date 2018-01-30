@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  get 'groups/index'
-
-  get 'groups/show'
-
-  get 'groups/new'
-
-  get 'groups/edit'
-
   root 'pages#index'
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
@@ -39,4 +31,12 @@ Rails.application.routes.draw do
   resources :groups do
     resources :member_ships, only: [ :new, :create, :destroy ]
   end
+
+  resources :admins
+  resources :reports, only: [ :index ]
+
+  post "mark_remove/:id" => "posts#mark_remove", as: "mark_remove"
+  post "unmark_remove/:id" => "posts#unmark_remove", as: "unmark_remove"
+  post "lock_account/:id" => "users#lock", as: "lock_account"
+  post "unlock_account/:id" => "users#unlock", as: "unlock_account"
 end

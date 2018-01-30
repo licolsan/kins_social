@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20180125064212) do
     t.string "title"
     t.text "content"
     t.integer "user_id"
+    t.boolean "is_marked_remove", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -113,6 +114,8 @@ ActiveRecord::Schema.define(version: 20180125064212) do
     t.string "avatar"
     t.string "cover_photo"
     t.string "color"
+    t.boolean "is_admin", default: false
+    t.boolean "is_lock", default: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
