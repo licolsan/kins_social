@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20180125064212) do
     t.text "reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id", "user_id"], name: "index_reports_on_post_id_and_user_id", unique: true
   end
 
   create_table "subscriptions", force: :cascade do |t|

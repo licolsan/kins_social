@@ -44,6 +44,9 @@
 						<%= link_to "Lock", lock_account_path(user), method: :post, class: "btn btn-danger" %>
 					</div>
 				<% end %>
+				<div class="col-xs-2">
+					<%= link_to "Send account problem notification", send_account_problem_noti_path(user), method: :post, class: "btn btn-info" %>
+				</div>
 			<% end %>
 		</div>
 	<% end %>

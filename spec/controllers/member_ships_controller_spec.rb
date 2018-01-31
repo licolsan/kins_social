@@ -5,7 +5,10 @@ RSpec.describe MemberShipsController, type: :controller do
 		sign_in @user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
 		@other_user = User.create(provider: "abc", uid: "cba", name: "cba", email: "b@b", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
 		@group = @user.groups.create(name: "My First Group", group_type: "Social", description: "Welcome to my group!")
-    @member_ship = @group.member_ships.create(user_id: @user.id, is_owner: true, is_admin: true)
+    @member_ship = MemberShip.find_by(group_id: @group.id, user_id: @user.id)
+    @member_ship.is_owner = true
+    @member_ship.is_admin = true
+    @member_ship.save
 	end
 
 	it "#new" do

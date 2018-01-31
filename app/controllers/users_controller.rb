@@ -39,21 +39,15 @@ class UsersController < ApplicationController
 
   def lock
     @user.lock
-    if @user.save
-      flash[:notice] = "Lock user complete!"
-    else
-      flash[:notice] = "Lock user failed!"
-    end
+    @user.save
+    flash[:notice] = "Lock user complete!"
     redirect_back(fallback_location: root_path)
   end
 
   def unlock
     @user.unlock
-    if @user.save
-      flash[:notice] = "Unlock user complete!"
-    else
-      flash[:notice] = "Unlock user failed!"
-    end
+    @user.save
+    flash[:notice] = "Unlock user complete!"
     redirect_back(fallback_location: root_path)
   end
 

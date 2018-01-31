@@ -7,6 +7,12 @@ RSpec.describe ReportsController, type: :controller do
 		@post = Post.create(user_id: @other_user.id, title: "abc", content: "abc")
 	end
 
+	it "List all report (admin)" do
+		@user.is_admin = true
+		@user.save
+		get :index
+	end
+
 	context "Write report" do
 		it "report's already exist!" do
 			@post.reports.create(user_id: @user.id, reason: "Bad content")

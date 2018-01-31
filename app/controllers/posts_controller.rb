@@ -37,11 +37,8 @@ class PostsController < ApplicationController
   def mark_remove
     if @post.reports.count > @@minimum_report_count
       @post.mark_remove
-      if @post.save
-        flash[:notice] = "Mark remove post complete!"
-      else
-        flash[:notice] = "Mark remove post failed!"
-      end
+      @post.save
+      flash[:notice] = "Mark remove post complete!"
     else
       flash[:notice] = "This post doesn't have more than #{@@minimum_report_count} reports!"
     end
@@ -50,11 +47,8 @@ class PostsController < ApplicationController
 
   def unmark_remove
     @post.unmark_remove
-    if @post.save
-      flash[:notice] = "Unmark remove post complete!"
-    else
-      flash[:notice] = "Unmark remove post failed!"
-    end
+    @post.save
+    flash[:notice] = "Unmark remove post complete!"
     redirect_back(fallback_location: root_path)
   end
   

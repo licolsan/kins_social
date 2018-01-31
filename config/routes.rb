@@ -39,4 +39,6 @@ Rails.application.routes.draw do
   post "unmark_remove/:id" => "posts#unmark_remove", as: "unmark_remove"
   post "lock_account/:id" => "users#lock", as: "lock_account"
   post "unlock_account/:id" => "users#unlock", as: "unlock_account"
+
+  post "send_account_problem_noti/:id" => "admins#send_problem_email", as: "send_account_problem_noti"
 end

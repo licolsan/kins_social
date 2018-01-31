@@ -30,9 +30,40 @@ RSpec.describe UsersController, type: :controller do
 		it "other profile" do
 			get :show, :params => { id: @other_user.id }
 		end
+		it "locked profile" do
+			@other_user.is_lock = true
+			@other_user.save
+			get :show, :params => { id: @other_user.id }
+		end
 	end
-	it "List all user" do
-		get :index
-		expect(response).to be_success
+
+	context "List all user" do
+		it "as a normal user" do
+			get :index
+			expect(response).to be_success
+		end
+		it "as a admin" do
+			@user.is_admin = true
+			@user.save
+			get :index
+			expect(response).to be_success
+		end
+	end
+
+	context "Lock & unlock" do
+		it "lock" do
+			@user.is_admin = true
+			@user.save
+			post :lock, params: { id: @other_user.id }
+			expect(User.find(@other_user.id).is_lock).to eq true
+		end
+		it "unlock" do
+			@user.is_admin = true
+			@user.save
+			@other_user.is_lock = true
+			@other_user.save
+			post :unlock, params: { id: @other_user.id }
+			expect(User.find(@other_user.id).is_lock).to eq false
+		end
 	end
 end
