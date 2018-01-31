@@ -1,10 +1,14 @@
 <% content_for :head do %>
   <div class="cover_photo">
+<<<<<<< HEAD
   <% if @user_show.cover_photo? %>
     <%= cl_image_tag @user_show.cover_photo, alt: "cover_photo" %>
   <% else %>
     <%= cl_image_tag("/default_cover_photo.jpg", alt: "group_cover_photo") %>
   <% end %>
+=======
+  <%= cl_image_tag @user_show.cover_photo, alt: "cover_photo" %>
+>>>>>>> features/update_user_profile
   </div>
   <div class="row">
     <div class="col-sm-12 user_banner">
@@ -51,11 +55,16 @@
     <tr>
       <td>
         <div class="avatar">
+<<<<<<< HEAD
           <% if @user_show.avatar? %>
             <%= cl_image_tag @user_show.avatar, alt: "user_avatar", class: "img-circle" %>
           <% else %>
             <%= image_tag("/default_avatar.jpeg", alt: "group_avatar", class: "img-circle") %>
           <% end %>
+=======
+          <%= cl_image_tag @user_show.avatar, alt: "user_avatar", class: "img-circle" %>
+
+>>>>>>> features/update_user_profile
         </div>
       </td>
       <td>
@@ -80,7 +89,11 @@
     <div class="col-xs-1"></div>
     <div class="col-xs-10 well">
       <div class="col-sm-2">
+<<<<<<< HEAD
         <%= cl_image_tag @post.user.avatar, alt: "user_avatar", class: "img-circle avatar_post" %>
+=======
+        <%= cl_image_tag @p.user.avatar, alt: "user_avatar", class: "img-circle avatar_post" %>
+>>>>>>> features/update_user_profile
       </div>
       <div class="col-sm-10">
       	<span><%= current_user.name %></span>
