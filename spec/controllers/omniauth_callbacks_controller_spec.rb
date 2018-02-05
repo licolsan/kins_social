@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe OmniauthCallbacksController, type: :controller do
-	# before(:each) do
-	# 	@user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
-	# 	@other_user = User.create(provider: "abc", uid: "cba", name: "cba", email: "b@b", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
-	# end
 	before do
+		sign_in @user = create(:user)
 		@request.env["devise.mapping"] = Devise.mappings[:user]
 	end
 

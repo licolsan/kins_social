@@ -14,4 +14,6 @@ Rails.application.routes.draw do
 
   post "follow/:id" => "follow_relationships#create", as: "follow"
   delete "unfollow/:id" => "follow_relationships#destroy", as: "unfollow"
+
+  get "select_country/:id" => "users#select_country", as: "select_country"
 end

@@ -10,7 +10,7 @@ class FollowRelationshipsController < ApplicationController
     end
     redirect_back(fallback_location: root_path)
   end
-    
+
   def destroy
     @relationship.destroy
     flash[:notice] = "Unfollow user complete!"

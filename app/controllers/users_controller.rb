@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: [ :index, :edit, :update ]
+  skip_before_action :finish_profile, only: [ :edit, :update ]
 
   def index
     @users = User.all_except(current_user)
@@ -17,6 +17,8 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @countries = Country.all
+    @cities = current_user.country.cities
   end
 
   def update
@@ -29,8 +31,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def select_country
+    @country = Country.find(params[:user][:country_id])
+    @cities = @country.cities
+    # render :json => {:success => true}
+    render :nothing => true, :status => 200, :content_type => 'text/html'
+  end
+
   private
   def user_params
-  	params.require(:user).permit(:name, :avatar, :cover_photo, :color, :email, :password, :password_confirmation)
+  	params.require(:user).permit(:name, :avatar, :cover_photo, :color, :email, :country_id, :city_id, :date_of_birth, :password, :password_confirmation)
   end
 end

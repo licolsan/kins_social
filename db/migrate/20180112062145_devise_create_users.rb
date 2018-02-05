@@ -10,6 +10,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :avatar
       t.string :cover_photo
       t.string :color
+      t.integer :country_id
+      t.integer :city_id
+      t.datetime :date_of_birth
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  
+
   before_action :authenticate_user!
+  before_action :finish_profile
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :all_friend_request, :all_waiters, :users
 
@@ -24,7 +25,10 @@ class ApplicationController < ActionController::Base
   	@waiters ||= current_user.get_waiters
   end
 
-  def require_user
-  	redirect_to log_in_path unless current_user
+  def finish_profile
+    if current_user.avatar.blank? || current_user.cover_photo.blank? || current_user.country.blank? || current_user.city.blank? || current_user.date_of_birth.blank?
+      flash[:notice] = "You need to update profile before continue"
+      redirect_to edit_user_path(current_user)
+    end
   end
 end

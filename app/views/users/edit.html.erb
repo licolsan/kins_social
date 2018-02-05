@@ -15,7 +15,7 @@
               </div>
               <div class="col-sm-2 post_num_font">
                 FOLLOWERS<br>
-                <h6 class="follower_count" "><%= current_user.followers.count %></h6>
+                <h6 class="follower_count"><%= current_user.followers.count %></h6>
               </div>
             </div>
           </div>
@@ -75,6 +75,26 @@
 				<label class="col-lg-2">Email</label>
 				<div class="col-lg-10">
 					<%= f.email_field :email, required: true, class: "form-control" %><br/><br/>
+				</div>
+			</div>
+      <div class="input-group input_group">
+				<label class="col-lg-2">Country</label>
+				<div class="col-lg-10">
+          <span class="form-control">
+            <%= f.collection_select(:country_id, @countries.collect, :id, :name, {}, { data: { remote: true, url: url_for(controller: "users", action: "select_country") } }) %><br/><br/>
+          </span>
+				</div>
+			</div>
+      <div class="input-group input_group">
+				<label class="col-lg-2">City</label>
+        <div class="col-lg-10">
+          <%= f.collection_select(:city_id, @cities.collect, :id, :name, {}, { class: "form-control" }) %><br/><br/>
+				</div>
+			</div>
+      <div class="input-group input_group">
+				<label class="col-lg-2">Date of birth</label>
+				<div class="col-lg-10">
+					<%= f.date_field :date_of_birth, required: true, class: "form-control" %><br/><br/>
 				</div>
 			</div>
 			<%= f.submit "Update Profile", class: "btn btn-primary update_profile" %>
