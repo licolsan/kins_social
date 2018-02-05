@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe OmniauthCallbacksController, type: :controller do
 	before do
+		sign_in @user = create(:user)
 		@request.env["devise.mapping"] = Devise.mappings[:user]
 	end
 

@@ -40,6 +40,9 @@ class User < ApplicationRecord
 	has_many :member_ships, dependent: :destroy
 	has_many :groups, through: :member_ships
 
+  belongs_to :country, optional: true
+  belongs_to :city, optional: true
+
 	mount_uploader :avatar, ImageUploader
 	mount_uploader :cover_photo, ImageUploader
 
@@ -51,6 +54,7 @@ class User < ApplicationRecord
   	where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
   		user.name = auth.info.name
   		user.email = auth.info.email
+			user.remote_avatar_url = (auth.info.image + "?type=large") if auth.info.image?
   		user.provider = auth.provider
   		user.uid = auth.uid
   		user.password = rand().to_s

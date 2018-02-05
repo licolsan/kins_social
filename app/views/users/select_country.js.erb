@@ -1,0 +1,6 @@
+$("#user_country_id").blur(function() {
+  $("#user_city_id").empty()
+  <% for city in @country.cities do %>
+    $("#user_city_id").append("<option value='<%= city.id %>'><%= city.name %></option>");
+  <% end %>
+});

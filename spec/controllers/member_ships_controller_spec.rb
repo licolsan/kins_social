@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe MemberShipsController, type: :controller do
 	before(:each) do
-		sign_in @user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
-		@other_user = User.create(provider: "abc", uid: "cba", name: "cba", email: "b@b", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
+		sign_in @user = create(:user)
+		@other_user = create(:user)
 		@group = @user.groups.create(name: "My First Group", group_type: "Social", description: "Welcome to my group!")
     @member_ship = MemberShip.find_by(group_id: @group.id, user_id: @user.id)
     @member_ship.is_owner = true

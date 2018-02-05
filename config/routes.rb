@@ -41,4 +41,5 @@ Rails.application.routes.draw do
   post "unlock_account/:id" => "users#unlock", as: "unlock_account"
 
   post "send_account_problem_noti/:id" => "admins#send_problem_email", as: "send_account_problem_noti"
+  get "select_country/:id" => "users#select_country", as: "select_country"
 end

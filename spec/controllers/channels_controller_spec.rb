@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ChannelsController, type: :controller do
 	before(:each) do
-		sign_in @user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
-		@other_user = User.create(provider: "abc", uid: "cba", name: "cba", email: "b@b", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
+		sign_in @user = create(:user)
+		@other_user = create(:user)
 	end
 
 	it "#new" do
@@ -22,13 +22,12 @@ RSpec.describe ChannelsController, type: :controller do
 			expect(subscription_1.channel_id).to eq subscription_2.channel_id
 		end
 		it "have channel before" do
-
 			post :create, params: { user_id: @other_user.id }
 			subscription_1 = Subscription.find_by(user_id: @user.id)
 			subscription_2 = Subscription.find_by(user_id: @other_user.id)
 			expect(subscription_1.channel_id).to eq subscription_2.channel_id
 		end
-		
+
 		it "without params[:user_id_id]" do
 			post :create
 			expect(flash[:notice].size).to be > 0

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 	before(:each) do
-		sign_in @user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
+		sign_in @user = create(:user)
 		@post = Post.create(user_id: @user.id, title: "def", content: "def")
 	end
 
@@ -52,7 +52,7 @@ RSpec.describe PostsController, type: :controller do
 			@report = @post.reports.create(user: @user3, reason: "abc")
 			@report = @post.reports.create(user: @user4, reason: "abc")
 			@report = @post.reports.create(user: @user5, reason: "abc")
-			
+
 			post :mark_remove, params: { id: @post.id }
 			expect(Post.find(@post.id).is_marked_remove).to eq true
 		end

@@ -11,12 +11,12 @@ RSpec.describe Post, type: :model do
   	end
   context "validation tests" do
   	it "ensure title presence" do
-  		user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
+			user = create(:user)
   		post = Post.new(user: user, title: "", content: "abc").save
   		expect(post).to eq(false)
   	end
   	it "ensure content presence" do
-  		user = User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today)
+			user = create(:user)
   		post = Post.new(user: user, title: "abc", content: "").save
   		expect(post).to eq(false)
   	end

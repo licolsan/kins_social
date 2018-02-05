@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
 	before(:each) do
-		sign_in @user = (User.create(provider: "abc", uid: "abc", name: "abc", email: "a@a", password: "123456", password_confirmation: "123456", confirmed_at: Date.today) || User.find_by(email: "a@a"))
+		sign_in @user = create(:user)
 		@post = Post.create(title: "Say hello", content: "Just say hello", user_id: @user.id)
 	end
 

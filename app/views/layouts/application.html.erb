@@ -60,7 +60,7 @@
 													<%= cl_image_tag waiter.avatar, alt: "user_avatar", class: "user_avatar" %>
 												</div>
 												<div class="col-xs-4">
-													<%= link_to waiter.name, user_path(waiter) %>	
+													<%= link_to waiter.name, user_path(waiter) %>
 												</div>
 												<div class="col-xs-2">
 													<%= link_to 'Accept', accept_path(waiter), method: :post, class: "btn btn-success" %>
@@ -243,7 +243,7 @@
 				        <% end %>
 				      </div>
 				    </div>
-				      
+
 				    <div class="card">
 				      <div class="card-body">
 				        <p style="opacity: 0.5; font-size: 90%;">
@@ -260,7 +260,7 @@
 					<% if notice %>
 			  		<%= notice %>
 			  	<% end %>
-		  	</div>	
+		  	</div>
 		  	<div class="alert-danger">
 			  	<% if alert %>
 			  		<%= alert %>

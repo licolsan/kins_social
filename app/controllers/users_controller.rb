@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [ :edit, :update, :lock,:unlock ]
   before_action :require_admin, only: [ :lock, :unlock ]
+  skip_before_action :finish_profile, only: [ :edit, :update, :select_country ]
 
   def index
     @users = User.all_except(current_user)
@@ -26,6 +27,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @countries = Country.all
+    if current_user.country
+      @cities = current_user.country.cities
+    else
+      @cities = @countries.first.cities
+    end
   end
 
   def update
@@ -51,9 +58,15 @@ class UsersController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def select_country
+    @country = Country.find(params[:user][:country_id])
+    @cities = @country.cities
+    # render :nothing => true, :status => 200, :content_type => 'text/html'
+  end
+
   private
   def user_params
-  	params.require(:user).permit(:name, :avatar, :cover_photo, :color, :email, :password, :password_confirmation)
+  	params.require(:user).permit(:name, :avatar, :cover_photo, :color, :email, :country_id, :city_id, :date_of_birth, :password, :password_confirmation)
   end
 
   def find_user

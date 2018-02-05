@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125064212) do
+ActiveRecord::Schema.define(version: 20180201024358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.string "name", default: "Blank name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.integer "country_id"
+    t.index ["name", "country_id"], name: "index_cities_on_name_and_country_id", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.index ["name"], name: "index_countries_on_name", unique: true
+  end
 
   create_table "follow_relationships", force: :cascade do |t|
     t.integer "follower_id"
@@ -103,6 +128,9 @@ ActiveRecord::Schema.define(version: 20180125064212) do
     t.string "color"
     t.boolean "is_admin", default: false
     t.boolean "is_lock", default: false
+    t.integer "country_id"
+    t.integer "city_id"
+    t.datetime "date_of_birth"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
