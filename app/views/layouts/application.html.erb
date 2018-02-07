@@ -238,6 +238,11 @@
                   <%= link_to user.name, user_path(user)%>
                 </p>
                 <% end %>
+                <% for user in current_user.receivers do %>
+                <p style="font-weight: bold; opacity: 0.85;" >
+                  <%= link_to user.name, user_path(user)%>
+                </p>
+                <% end %>
 				      </div>
 				    </div>
 				  </div>
