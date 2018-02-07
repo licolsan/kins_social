@@ -76,7 +76,7 @@
 								<div class="btn-group">
 								  <div data-toggle="dropdown">
 								  	<a href="">
-								  		<span class="num_of_notificcation green_noti" "></span>
+								  		<span class="num_of_notificcation green_noti"></span>
 								  		<span class="glyphicon glyphicon-comment glyphicon_noti"></span>
 								  	</a>
 								  </div>
@@ -232,23 +232,12 @@
 				  <div class="col-xs-2 well message_hidden">
 				    <div class="card">
 				      <div class="card-body">
-				        <h5 style="color: grey; font-size: 125%;">Who to follow</h5>
-				        <% for user in users do %>
-					        <% if !current_user.is_following?(user) %>
-					        	<p style="font-weight: bold; opacity: 0.85;" >
-					          	<%= link_to user.name, user_path(user)%>
-					          	<%= link_to "Follow", follow_path(user), method: :post, class: "btn btn-default btn-xs" %>
-					          </p>
-					        <% end %>
-				        <% end %>
-				      </div>
-				    </div>
-
-				    <div class="card">
-				      <div class="card-body">
-				        <p style="opacity: 0.5; font-size: 90%;">
-				        	© 2016 Flutter  About  Help  Terms  Privacy  Cookies  Ads Info  Brand  Blog  Status  Apps  Jobs  Advertise  Businesses  Media  Developers
-				        </p>
+				        <h5 style="color: grey; font-size: 125%;">Friend(s)</h5>
+                <% for user in current_user.senders do %>
+                <p style="font-weight: bold; opacity: 0.85;" >
+                  <%= link_to user.name, user_path(user)%>
+                </p>
+                <% end %>
 				      </div>
 				    </div>
 				  </div>
