@@ -40,7 +40,8 @@ class UsersController < ApplicationController
       flash[:notice] = "Your profile has been update!"
       redirect_to user_path
     else
-      render 'edit'
+      flash[:notice] = @user.errors
+      redirect_back(fallback_location: root_path)
     end
   end
 
