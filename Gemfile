@@ -36,7 +36,7 @@ gem 'omniauth-google-oauth2', '0.2.9'
 gem 'rails-controller-testing'
 
 gem 'sendgrid-ruby'
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bootstrap-sass', '~> 3.4'
 gem 'jquery-rails'
 gem 'carrierwave'
 gem 'cloudinary'
